@@ -20,6 +20,8 @@
         android:background="@color/teal_700"
         app:menu="@menu/menu_bottom_navigation"
         app:itemTextColor="@color/customer_color_navigation"
-        app:itemIconTint="@color/customer_color_navigation"/>
+        app:itemIconTint="@color/customer_color_navigation"
+        app:labelVisibilityMode="labeled"
+        />
 
 </RelativeLayout>

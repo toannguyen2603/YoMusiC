@@ -10,12 +10,10 @@ import java.util.ArrayList;
 public class HomeViewPagerAdapter extends FragmentStateAdapter {
 
     private final ArrayList<Fragment>  arrayFragment = new ArrayList<>();
-    private final ArrayList<String> arrayTitle = new ArrayList<>();
 
     public HomeViewPagerAdapter(@NonNull FragmentActivity fragmentActivity) {
         super(fragmentActivity);
     }
-
     @NonNull
     @Override
     public Fragment createFragment(int position) {
@@ -28,9 +26,8 @@ public class HomeViewPagerAdapter extends FragmentStateAdapter {
     }
 
 //    Add info fragment to array list
-    public void addFragment(Fragment fragment, String title){
+    public void addFragment(Fragment fragment){
         arrayFragment.add(fragment);
-        arrayTitle.add(title);
     }
 
 

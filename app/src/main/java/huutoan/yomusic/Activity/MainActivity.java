@@ -1,6 +1,7 @@
 package huutoan.yomusic.Activity;
 
 import huutoan.yomusic.Adapter.HomeViewPagerAdapter;
+import huutoan.yomusic.Fragment.Fragment_Account;
 import huutoan.yomusic.Fragment.Fragment_Home_Page;
 import huutoan.yomusic.Fragment.Fragment_Library;
 import huutoan.yomusic.Fragment.Fragment_Search;
@@ -36,9 +37,10 @@ public class MainActivity extends AppCompatActivity {
     private void initNavigation() {
 //        add fragment view in main activity
         HomeViewPagerAdapter homeViewPagerAdapter = new HomeViewPagerAdapter(this);
-        homeViewPagerAdapter.addFragment(new Fragment_Home_Page(), "Home");
-        homeViewPagerAdapter.addFragment(new Fragment_Search(), "Search");
-        homeViewPagerAdapter.addFragment(new Fragment_Library(), "Library");
+        homeViewPagerAdapter.addFragment(new Fragment_Home_Page());
+        homeViewPagerAdapter.addFragment(new Fragment_Search());
+        homeViewPagerAdapter.addFragment(new Fragment_Library());
+        homeViewPagerAdapter.addFragment(new Fragment_Account());
 
 //         set add adapter
         mainViewPager2.setAdapter(homeViewPagerAdapter);
@@ -51,17 +53,21 @@ public class MainActivity extends AppCompatActivity {
             public void onPageSelected(int position) {
                 super.onPageSelected(position);
                 switch (position) {
-                case 0:
-                    bottomNavigation.getMenu().findItem(R.id.home_page).setChecked(true);
-                    break;
-                case 1:
-                    bottomNavigation.getMenu().findItem(R.id.search).setChecked(true);
-                    break;
-                case 2:
-                    bottomNavigation.getMenu().findItem(R.id.library).setChecked(true);
+                    case 0:
+                        bottomNavigation.getMenu().findItem(R.id.home_page).setChecked(true);
+                        break;
+                    case 1:
+                        bottomNavigation.getMenu().findItem(R.id.search).setChecked(true);
+                        break;
+                    case 2:
+                        bottomNavigation.getMenu().findItem(R.id.library).setChecked(true);
+                        break;
+                    case 3:
+                        bottomNavigation.getMenu().findItem(R.id.account).setChecked(true);
                 }
             }
         });
+
 //        get event switch the page with bottom navigation
         bottomNavigation.setOnItemSelectedListener(item -> {
             int id = item.getItemId();
@@ -76,6 +82,10 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.library:
                     mainViewPager2.setCurrentItem(2, true);
                     break;
+                case R.id.account:
+                    mainViewPager2.setCurrentItem(3, true);
+
+
             }
             return true;
         });
