@@ -12,6 +12,7 @@ import androidx.viewpager.widget.PagerAdapter;
 
 import java.util.ArrayList;
 
+import huutoan.yomusic.Model.Song;
 import huutoan.yomusic.Model.User;
 import huutoan.yomusic.R;
 

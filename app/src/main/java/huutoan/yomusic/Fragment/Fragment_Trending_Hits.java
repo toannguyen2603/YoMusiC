@@ -2,7 +2,6 @@ package huutoan.yomusic.Fragment;
 
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import huutoan.yomusic.Adapter.TrendingAdapter;
+import huutoan.yomusic.Model.User;
 import huutoan.yomusic.Model.User;
 import huutoan.yomusic.R;
 import huutoan.yomusic.Service.APIService;
@@ -78,6 +78,7 @@ public class Fragment_Trending_Hits extends Fragment {
             public void onFailure(Call<List<User>> call, Throwable t) {
 
             }
+
         });
     }
 }
