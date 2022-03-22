@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
 //         set add adapter
         mainViewPager2.setAdapter(homeViewPagerAdapter);
+
 //        get animation depth page transformer
         mainViewPager2.setPageTransformer(new DepthPageTransformer());
 

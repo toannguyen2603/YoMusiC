@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+    <ImageView
+        android:id="@+id/imageViewTrending"
+        android:scaleType="fitXY"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@drawable/custom_background_trending" />
+
+    <RelativeLayout
+        android:id="@+id/relativeBody"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/imageViewTrending"
+        >
+
+        <ImageView
+            android:id="@+id/imageTrending"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            android:padding="2dp" />
+        <TextView
+            android:id="@+id/textTitle"
+            android:layout_marginTop="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/imageTrending"
+            android:layout_toRightOf="@id/imageTrending"
+            android:textSize="17sp"
+            android:text="Lỡ yêu mất rồi"
+            android:textColor="#fff"
+            android:textStyle="bold"
+            />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textTitle"
+            android:layout_toRightOf="@id/imageTrending"
+            android:layout_marginTop="7dp">
+            <TextView
+                android:id="@+id/textDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="13sp"
+                android:layout_marginRight="20dp"
+                android:maxLines="2"
+                android:textColor="#fff"
+                android:text="Chao ban den voi ca khuc moi cua ca si Son Tung MTP, day la 1 bai hat kha hay moi ban thuong thuc"
+                />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+</RelativeLayout>
