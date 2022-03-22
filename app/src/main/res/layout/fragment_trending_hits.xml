@@ -7,21 +7,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         >
-
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            app:cardCornerRadius="15dp"
-
+            android:layout_margin="10dp"
+            app:cardCornerRadius="10dp"
             >
 
             <androidx.viewpager.widget.ViewPager
                 android:id="@+id/trendingViewFlipper"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="230dp"
                 android:contentDescription="trending">
-
                 <me.relex.circleindicator.CircleIndicator
                     android:id="@+id/indicator"
                     android:layout_width="wrap_content"

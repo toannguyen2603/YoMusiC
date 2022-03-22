@@ -7,12 +7,12 @@
         android:id="@+id/imageViewTrending"
         android:scaleType="fitXY"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="230dp"
         />
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="230dp"
         android:background="@drawable/custom_background_trending" />
 
     <RelativeLayout

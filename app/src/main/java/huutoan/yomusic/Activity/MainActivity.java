@@ -1,97 +1,59 @@
 package huutoan.yomusic.Activity;
 
-import huutoan.yomusic.Adapter.HomeViewPagerAdapter;
 import huutoan.yomusic.Fragment.Fragment_Account;
 import huutoan.yomusic.Fragment.Fragment_Home_Page;
 import huutoan.yomusic.Fragment.Fragment_Library;
 import huutoan.yomusic.Fragment.Fragment_Search;
 import huutoan.yomusic.R;
-import huutoan.yomusic.Custom.*;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.viewpager2.widget.ViewPager2;
+import androidx.fragment.app.Fragment;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 
 public class MainActivity extends AppCompatActivity {
 
-    ViewPager2 mainViewPager2;
     BottomNavigationView bottomNavigation;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 //        call layout
-        mainViewPager2 = findViewById(R.id.mainViewPager2);
         bottomNavigation = findViewById(R.id.bottom_navigation);
-        initNavigation();
 
+//        run fragment home first when show UI
+        getSupportFragmentManager().beginTransaction().replace(R.id.mainViewPager2, new Fragment_Home_Page()).commit();
+
+//        get event when click navigation
+        bottomNavigation.setOnItemSelectedListener(onItemSelectedListener);
     }
 
-//
     @SuppressLint("NonConstantResourceId")
-    private void initNavigation() {
-//        add fragment view in main activity
-        HomeViewPagerAdapter homeViewPagerAdapter = new HomeViewPagerAdapter(this);
-        homeViewPagerAdapter.addFragment(new Fragment_Home_Page());
-        homeViewPagerAdapter.addFragment(new Fragment_Search());
-        homeViewPagerAdapter.addFragment(new Fragment_Library());
-        homeViewPagerAdapter.addFragment(new Fragment_Account());
+    private final NavigationBarView.OnItemSelectedListener onItemSelectedListener = (item -> {
+        int id = item.getItemId();
+        Fragment selectedFragment =  null;
+        switch (id) {
+            case R.id.home_page:
+                selectedFragment = new Fragment_Home_Page();
+                break;
+            case R.id.search:
+                selectedFragment = new Fragment_Search();
+                break;
+            case R.id.library:
+                selectedFragment = new Fragment_Library();
+                break;
+            case R.id.account:
+                selectedFragment = new Fragment_Account();
+                break;
+        }
+        assert selectedFragment != null;
+        getSupportFragmentManager().beginTransaction().replace(R.id.mainViewPager2, selectedFragment).commit();
+        return true;
+    });
 
-//         set add adapter
-        mainViewPager2.setAdapter(homeViewPagerAdapter);
-
-//        get animation depth page transformer
-        mainViewPager2.setPageTransformer(new DepthPageTransformer());
-
-//        register scroll page to horizontal
-        mainViewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
-            @Override
-            public void onPageSelected(int position) {
-                super.onPageSelected(position);
-                switch (position) {
-                    case 0:
-                        bottomNavigation.getMenu().findItem(R.id.home_page).setChecked(true);
-                        break;
-                    case 1:
-                        bottomNavigation.getMenu().findItem(R.id.search).setChecked(true);
-                        break;
-                    case 2:
-                        bottomNavigation.getMenu().findItem(R.id.library).setChecked(true);
-                        break;
-                    case 3:
-                        bottomNavigation.getMenu().findItem(R.id.account).setChecked(true);
-                }
-            }
-        });
-
-//        get event switch the page with bottom navigation
-        bottomNavigation.setOnItemSelectedListener(item -> {
-            int id = item.getItemId();
-
-            switch(id){
-                case R.id.home_page:
-                    mainViewPager2.setCurrentItem(0, true);
-                    break;
-                case R.id.search:
-                    mainViewPager2.setCurrentItem(1, true);
-                    break;
-                case R.id.library:
-                    mainViewPager2.setCurrentItem(2, true);
-                    break;
-                case R.id.account:
-                    mainViewPager2.setCurrentItem(3, true);
-
-
-            }
-            return true;
-        });
-
-
-
-    }
 }

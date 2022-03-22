@@ -44,6 +44,7 @@ public class Fragment_Trending_Hits extends Fragment {
         return view;
     }
 
+//    get data from server
     private void GetData(){
         DataService dataService = APIService.getService();
         Call<List<User>> callback = dataService.GetDataUser();
@@ -59,6 +60,7 @@ public class Fragment_Trending_Hits extends Fragment {
 //                implement work when handler call
                 runnable = new Runnable() {
                     @Override
+//                    run automation switch view page
                     public void run() {
                         currentItem = viewPager.getCurrentItem();
                         currentItem++;
