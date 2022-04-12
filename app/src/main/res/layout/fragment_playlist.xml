@@ -20,7 +20,7 @@
         android:id="@+id/listItemPlayList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/textPlayList"
+        android:layout_below="@id/textTitlePlayList"
         />
     <TextView
         android:id="@+id/textViewMorePlayList"

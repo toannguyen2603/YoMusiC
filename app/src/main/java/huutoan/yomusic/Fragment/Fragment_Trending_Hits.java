@@ -15,8 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import huutoan.yomusic.Adapter.TrendingAdapter;
-import huutoan.yomusic.Model.User;
-import huutoan.yomusic.Model.User;
+import huutoan.yomusic.Model.Trending;
 import huutoan.yomusic.R;
 import huutoan.yomusic.Service.APIService;
 import huutoan.yomusic.Service.DataService;
@@ -31,6 +30,7 @@ public class Fragment_Trending_Hits extends Fragment {
     CircleIndicator circleIndicator;
     TrendingAdapter trendingAdapter;
     int currentItem;
+
 //    Animation auto switch
     Runnable runnable;
     Handler handler;
@@ -41,25 +41,27 @@ public class Fragment_Trending_Hits extends Fragment {
         GetData();
         viewPager = view.findViewById(R.id.trendingViewFlipper);
         circleIndicator = view.findViewById(R.id.indicator);
+        circleIndicator.setViewPager(viewPager);
         return view;
     }
 
 //    get data from server
     private void GetData(){
         DataService dataService = APIService.getService();
-        Call<List<User>> callback = dataService.GetDataUser();
-        callback.enqueue(new Callback<List<User>>() {
+        Call<List<Trending>> callback = dataService.GetDataTrending();
+        callback.enqueue(new Callback<List<Trending>>() {
             @Override
-            public void onResponse(Call<List<User>> call, Response<List<User>> response) {
-                ArrayList<User> users = (ArrayList<User>) response.body();
-                trendingAdapter = new TrendingAdapter(getActivity(), users);
+            public void onResponse(Call<List<Trending>> call, Response<List<Trending>> response) {
+                ArrayList<Trending> trendings = (ArrayList<Trending>) response.body();
+                trendingAdapter = new TrendingAdapter(getActivity(), trendings);
                 viewPager.setAdapter(trendingAdapter);
-                circleIndicator.setViewPager(viewPager);
 //                manager
                 handler = new Handler();
+
 //                implement work when handler call
                 runnable = new Runnable() {
                     @Override
+
 //                    run automation switch view page
                     public void run() {
                         currentItem = viewPager.getCurrentItem();
@@ -74,8 +76,9 @@ public class Fragment_Trending_Hits extends Fragment {
                 handler.postDelayed(runnable, 3000);
             }
 
+
             @Override
-            public void onFailure(Call<List<User>> call, Throwable t) {
+            public void onFailure(Call<List<Trending>> call, Throwable t) {
 
             }
 

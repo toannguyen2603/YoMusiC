@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="#5F5C5C"
+    android:background="@color/white"
     android:layout_height="match_parent"
     tools:context=".Activity.MainActivity">
 
@@ -18,11 +18,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@color/teal_700"
-        app:menu="@menu/menu_bottom_navigation"
-        app:itemTextColor="@color/customer_color_navigation"
+        android:background="@color/black_bottom_navigation"
         app:itemIconTint="@color/customer_color_navigation"
+        app:itemTextColor="@color/customer_color_navigation"
         app:labelVisibilityMode="labeled"
-        />
+        app:menu="@menu/menu_bottom_navigation" />
 
 </RelativeLayout>

@@ -9,28 +9,31 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
+import androidx.viewpager2.adapter.FragmentStateAdapter;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-import huutoan.yomusic.Model.Song;
+import huutoan.yomusic.Model.Trending;
 import huutoan.yomusic.Model.User;
 import huutoan.yomusic.R;
 
 public class TrendingAdapter extends PagerAdapter {
     Context context;
-    ArrayList<User> userArrayList;
+    ArrayList<Trending> trendingsArrayList;
 
     ImageView imageViewTrending, imageTrending;
     TextView textTitle, textDescription;
 
-    public TrendingAdapter(Context context, ArrayList<User> userArrayList) {
+    public TrendingAdapter(Context context, ArrayList<Trending> trendingsArrayList) {
         this.context = context;
-        this.userArrayList = userArrayList;
+        this.trendingsArrayList = trendingsArrayList;
     }
 
     @Override
     public int getCount() {
-        return userArrayList.size();
+        return trendingsArrayList.size();
     }
 
     @Override
@@ -51,8 +54,10 @@ public class TrendingAdapter extends PagerAdapter {
         textDescription = view.findViewById(R.id.textDescription);
 
 //       get data from list
-        textTitle.setText(userArrayList.get(position).getName());
-        textDescription.setText(userArrayList.get(position).getEmail());
+        textTitle.setText(trendingsArrayList.get(position).getSongId());
+        textDescription.setText(trendingsArrayList.get(position).getDescription());
+        Picasso.get().load(trendingsArrayList.get(position).getImage()).into(imageViewTrending);
+        Picasso.get().load(trendingsArrayList.get(position).getImage()).into(imageTrending);
         container.addView(view);
         return view;
     }

@@ -37,25 +37,24 @@ public class Fragment_PlayList extends Fragment {
        textTitlePlayList = view.findViewById(R.id.textTitlePlayList);
        textMorePlayList = view.findViewById(R.id.textViewMorePlayList);
 
-       GetData();
+//       GetData();
         return view;
     }
 
-    private void GetData(){
-        DataService dataService = APIService.getService();
-        Call<List<Post>> callback = dataService.GetDataPost();
-        callback.enqueue(new Callback<List<Post>>() {
-            @Override
-            public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
-                ArrayList<Post> posts = (ArrayList<Post>) response.body();
-                Log.d("AAA", posts.get(0).getBody());
-            }
-
-            @Override
-            public void onFailure(Call<List<Post>> call, Throwable t) {
-
-            }
-        });
-
-    }
+//    private void GetData(){
+//        DataService dataService = APIService.getService();
+//        Call<List<Post>> callback = dataService.GetDataPost();
+//        callback.enqueue(new Callback<List<Post>>() {
+//            @Override
+//            public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
+//                ArrayList<Post> posts = (ArrayList<Post>) response.body();
+//            }
+//
+//            @Override
+//            public void onFailure(Call<List<Post>> call, Throwable t) {
+//
+//            }
+//        });
+//
+//    }
 }
