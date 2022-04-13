@@ -5,30 +5,25 @@
 
     <ImageButton
         android:id="@+id/btnPlayList"
-        android:scaleType="fitXY"
-        android:layout_marginTop="5dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_width="match_parent"
-        android:layout_height="110dp"/>
-    <View
         android:layout_width="match_parent"
         android:layout_height="110dp"
+        android:layout_marginLeft="8dp"
         android:layout_marginTop="5dp"
         android:layout_marginRight="8dp"
-        android:layout_marginLeft="8dp"
-        android:background="@drawable/custom_background_trending"
-        />
+        android:scaleType="fitXY"
+         />
+
+
+
     <ImageView
         android:id="@+id/imageViewPlayList"
-        android:layout_marginBottom="10dp"
-        android:layout_marginLeft="15dp"
-        android:layout_alignBottom="@+id/btnPlayList"
-        android:elevation="6dp"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:scaleType="fitXY"
-        />
+        android:layout_alignBottom="@+id/btnPlayList"
+        android:layout_marginLeft="15dp"
+        android:layout_marginBottom="10dp"
+        android:elevation="6dp"
+        android:scaleType="fitXY" />
     <TextView
         android:id="@+id/textViewPlayList"
         android:layout_width="wrap_content"

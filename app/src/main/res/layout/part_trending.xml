@@ -14,8 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="230dp"
         android:alpha="0.20"
-        android:background="@drawable/custom_background_trending"
-         />
+        android:background="@drawable/custom_background_trending" />
 
     <RelativeLayout
         android:id="@+id/relativeBody"
