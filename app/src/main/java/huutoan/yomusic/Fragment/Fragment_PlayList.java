@@ -71,6 +71,7 @@ public class Fragment_PlayList extends Fragment {
 
     }
 
+//    Set Height of ListView at run time in android
     public static boolean setListViewHeightBasedOnItems(ListView listView) {
 
         ListAdapter listAdapter = listView.getAdapter();

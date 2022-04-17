@@ -11,5 +11,5 @@
         android:icon="@drawable/library"/>
     <item android:id="@+id/account"
         android:title="@string/account"
-        android:icon="@drawable/account"/>
+        android:icon="@drawable/setting"/>
 </menu>
