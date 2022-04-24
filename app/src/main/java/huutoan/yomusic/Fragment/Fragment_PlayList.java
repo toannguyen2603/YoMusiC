@@ -1,7 +1,6 @@
 package huutoan.yomusic.Fragment;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +17,6 @@ import java.util.List;
 
 import huutoan.yomusic.Adapter.PlayListAdapter;
 import huutoan.yomusic.Model.PlayList;
-import huutoan.yomusic.Model.Post;
 import huutoan.yomusic.R;
 import huutoan.yomusic.Service.APIService;
 import huutoan.yomusic.Service.DataService;

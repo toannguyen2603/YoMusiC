@@ -13,6 +13,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import huutoan.yomusic.Adapter.TrendingAdapter;
 import huutoan.yomusic.Model.Trending;
@@ -51,7 +52,7 @@ public class Fragment_Trending_Hits extends Fragment {
         Call<List<Trending>> callback = dataService.GetDataTrending();
         callback.enqueue(new Callback<List<Trending>>() {
             @Override
-            public void onResponse(Call<List<Trending>> call, Response<List<Trending>> response) {
+            public void onResponse(@NonNull Call<List<Trending>> call, @NonNull Response<List<Trending>> response) {
                 ArrayList<Trending> trendings = (ArrayList<Trending>) response.body();
                 trendingAdapter = new TrendingAdapter(getActivity(), trendings);
                 viewPager.setAdapter(trendingAdapter);
@@ -59,26 +60,22 @@ public class Fragment_Trending_Hits extends Fragment {
                 handler = new Handler();
 
 //                implement work when handler call
-                runnable = new Runnable() {
-                    @Override
-
-//                    run automation switch view page
-                    public void run() {
-                        currentItem = viewPager.getCurrentItem();
-                        currentItem++;
-                        if(currentItem >= viewPager.getAdapter().getCount()){
-                            currentItem = 0;
-                        }
-                        viewPager.setCurrentItem(currentItem, true);
-                        handler.postDelayed(runnable, 3000);
+//                run automation switch view page
+                runnable = () -> {
+                    currentItem = viewPager.getCurrentItem();
+                    currentItem++;
+                    if(currentItem >= Objects.requireNonNull(viewPager.getAdapter()).getCount()){
+                        currentItem = 0;
                     }
+                    viewPager.setCurrentItem(currentItem, true);
+                    handler.postDelayed(runnable, 3000);
                 };
                 handler.postDelayed(runnable, 3000);
             }
 
 
             @Override
-            public void onFailure(Call<List<Trending>> call, Throwable t) {
+            public void onFailure(@NonNull Call<List<Trending>> call, @NonNull Throwable t) {
 
             }
 

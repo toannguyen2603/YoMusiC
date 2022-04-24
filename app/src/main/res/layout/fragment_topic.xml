@@ -19,6 +19,7 @@
             android:textColor="#000000"
             />
         <TextView
+            android:id="@+id/seeMore"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="See more"
@@ -26,7 +27,15 @@
             android:textColor="#6C2DDC"
             android:layout_alignParentRight="true"
             />
-
     </RelativeLayout>
+    <HorizontalScrollView
+        android:id="@+id/horizontalScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/relativeTopic"
+        android:scrollbars="none"
+        >
+
+    </HorizontalScrollView>
 
 </RelativeLayout>
