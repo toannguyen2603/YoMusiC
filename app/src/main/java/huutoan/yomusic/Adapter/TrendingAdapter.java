@@ -21,19 +21,19 @@ import huutoan.yomusic.R;
 
 public class TrendingAdapter extends PagerAdapter {
     Context context;
-    ArrayList<Trending> trendingsArrayList;
+    ArrayList<Trending> trendingArrayList;
 
     ImageView imageViewTrending, imageTrending;
     TextView textTitle, textDescription;
 
     public TrendingAdapter(Context context, ArrayList<Trending> trendingsArrayList) {
         this.context = context;
-        this.trendingsArrayList = trendingsArrayList;
+        this.trendingArrayList = trendingsArrayList;
     }
 
     @Override
     public int getCount() {
-        return trendingsArrayList.size();
+        return trendingArrayList.size();
     }
 
     @Override
@@ -54,14 +54,13 @@ public class TrendingAdapter extends PagerAdapter {
         textDescription = view.findViewById(R.id.textDescription);
 
 //       get data from list
-        textTitle.setText(trendingsArrayList.get(position).getSongId());
-        textDescription.setText(trendingsArrayList.get(position).getDescription());
-        Picasso.get().load(trendingsArrayList.get(position).getImage()).into(imageViewTrending);
-        Picasso.get().load(trendingsArrayList.get(position).getImage()).into(imageTrending);
+        textTitle.setText(trendingArrayList.get(position).getSongId());
+        textDescription.setText(trendingArrayList.get(position).getDescription());
+        Picasso.get().load(trendingArrayList.get(position).getImage()).into(imageViewTrending);
+        Picasso.get().load(trendingArrayList.get(position).getImage()).into(imageTrending);
         container.addView(view);
         return view;
     }
-
 
     @Override
     public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
