@@ -11,6 +11,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,8 +29,9 @@ import retrofit2.Response;
 public class Fragment_PlayList extends Fragment {
 
     View view;
-    ListView vPlayList;
-    TextView textTitlePlayList, textMorePlayList;
+    TextView textTitlePlayList;
+    RecyclerView recyclerViewPlayList;
+
     PlayListAdapter playListAdapter;
     ArrayList<PlayList> playLists;
     @Nullable
@@ -36,9 +39,8 @@ public class Fragment_PlayList extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
        view = inflater.inflate(R.layout.fragment_playlist, container, false);
 //       get layout
-       vPlayList = view.findViewById(R.id.listItemPlayList);
+        recyclerViewPlayList = view.findViewById(R.id.recyclerViewPlayList);
        textTitlePlayList = view.findViewById(R.id.textTitlePlayList);
-       textMorePlayList = view.findViewById(R.id.textViewMorePlayList);
 
        GetData();
         return view;
@@ -56,9 +58,13 @@ public class Fragment_PlayList extends Fragment {
             @Override
             public void onResponse(Call<List<PlayList>> call, Response<List<PlayList>> response) {
                 playLists = (ArrayList<PlayList>) response.body();
-                playListAdapter = new PlayListAdapter(getActivity(), android.R.layout.simple_list_item_1,playLists);
-                vPlayList.setAdapter(playListAdapter);
-                setListViewHeightBasedOnItems(vPlayList);
+
+                playListAdapter = new PlayListAdapter(getActivity() ,playLists);
+
+                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+                linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+                recyclerViewPlayList.setLayoutManager(linearLayoutManager);
+                recyclerViewPlayList.setAdapter(playListAdapter);
             }
 
             @Override
