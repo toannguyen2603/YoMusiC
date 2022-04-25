@@ -39,10 +39,9 @@ public class Fragment_Trending_Hits extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_trending_hits, container,false);
-        GetData();
         viewPager = view.findViewById(R.id.trendingViewFlipper);
         circleIndicator = view.findViewById(R.id.indicator);
-        circleIndicator.setViewPager(viewPager);
+        GetData();
         return view;
     }
 
@@ -53,12 +52,13 @@ public class Fragment_Trending_Hits extends Fragment {
         callback.enqueue(new Callback<List<Trending>>() {
             @Override
             public void onResponse(@NonNull Call<List<Trending>> call, @NonNull Response<List<Trending>> response) {
-                ArrayList<Trending> trendings = (ArrayList<Trending>) response.body();
-                trendingAdapter = new TrendingAdapter(getActivity(), trendings);
+                ArrayList<Trending> trending = (ArrayList<Trending>) response.body();
+                trendingAdapter = new TrendingAdapter(getActivity(), trending);
+//
                 viewPager.setAdapter(trendingAdapter);
+                circleIndicator.setViewPager(viewPager);
 //                manager
                 handler = new Handler();
-
 //                implement work when handler call
 //                run automation switch view page
                 runnable = () -> {
