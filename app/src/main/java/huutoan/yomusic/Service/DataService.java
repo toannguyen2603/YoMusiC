@@ -3,10 +3,9 @@ package huutoan.yomusic.Service;
 import java.util.List;
 
 import huutoan.yomusic.Model.PlayList;
-import huutoan.yomusic.Model.Post;
+import huutoan.yomusic.Model.Singer;
 import huutoan.yomusic.Model.Topic;
 import huutoan.yomusic.Model.Trending;
-import huutoan.yomusic.Model.User;
 import retrofit2.Call;
 import retrofit2.http.GET;
 
@@ -20,6 +19,10 @@ public interface DataService {
 
     @GET("api/getAllTopic")
     Call<List<Topic>> GetDataTopic();
+
+
+    @GET("api/getAllAlbum")
+    Call<List<Singer>> GetDataSinger();
 
 
 

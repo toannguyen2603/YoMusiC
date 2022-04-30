@@ -33,5 +33,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:layout="@layout/fragment_playlist" />
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/fragmentAlbum"
+            android:name="huutoan.yomusic.Fragment.Fragment_Album"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:layout="@layout/fragment_album" />
     </LinearLayout>
 </ScrollView>

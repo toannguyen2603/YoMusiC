@@ -27,41 +27,7 @@ public class PlayListAdapter extends RecyclerView.Adapter<PlayListAdapter.ViewHo
         this.context = context;
         this.arrayListPlayList = arrayListPlayList;
     }
-
-//       public PlayListAdapter(@NonNull Context context, int resource, @NonNull List<PlayList> objects) {
-//        super(context, resource, objects);
-//    }
-//
-////    save data first mapping
-//    static class ViewHolder {
-//        TextView textPlayList;
-//        ImageView  imagePlayList;
-//    }
-//
-//    @NonNull
-//    @Override
-//    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-//        ViewHolder viewHolder = null;
-//
-////        check when running the application, the data is already in the play list or not
-//        if(convertView == null){
-//            LayoutInflater inflater = LayoutInflater.from(getContext());
-//            convertView =  inflater.inflate(R.layout.part_playlist, null);
-//            viewHolder  = new ViewHolder();
-//            viewHolder.textPlayList = convertView.findViewById(R.id.textViewPlayList);
-//            viewHolder.imagePlayList = convertView.findViewById(R.id.imageViewPlayList);
-//            convertView.setTag(viewHolder);
-//        } else {
-//            viewHolder = (ViewHolder) convertView.getTag();
-//        }
-//
-//        PlayList playList = getItem(position);
-//        Picasso.get().load(playList.getThumbnail()).into(viewHolder.imagePlayList);
-//        viewHolder.textPlayList.setText(playList.getName());
-//        return convertView;
-//    }
-
-
+    
     @NonNull
     @Override
     public PlayListAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

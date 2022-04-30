@@ -10,7 +10,9 @@
         <entry key="app/src/main/res/drawable-v24/outline_autorenew_24.xml" value="0.2005" />
         <entry key="app/src/main/res/drawable-v24/outline_fitbit_24.xml" value="0.2005" />
         <entry key="app/src/main/res/drawable/account.xml" value="0.265" />
+        <entry key="app/src/main/res/drawable/custom_background_main.xml" value="0.177" />
         <entry key="app/src/main/res/drawable/custom_background_trending.xml" value="0.22147064208984374" />
+        <entry key="app/src/main/res/drawable/custom_image_playlist.xml" value="0.177" />
         <entry key="app/src/main/res/drawable/custom_radius_trending.xml" value="0.221" />
         <entry key="app/src/main/res/drawable/home.xml" value="0.2005" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.2005" />
@@ -24,6 +26,7 @@
         <entry key="app/src/main/res/font/arimo_bold.xml" value="0.31562819203268644" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.18701171875000006" />
         <entry key="app/src/main/res/layout/fragment_account.xml" value="0.2557291666666667" />
+        <entry key="app/src/main/res/layout/fragment_album.xml" value="0.266304347826087" />
         <entry key="app/src/main/res/layout/fragment_home_page.xml" value="0.2557291666666667" />
         <entry key="app/src/main/res/layout/fragment_library.xml" value="0.2557291666666667" />
         <entry key="app/src/main/res/layout/fragment_playlist.xml" value="0.2557291666666667" />
@@ -31,7 +34,9 @@
         <entry key="app/src/main/res/layout/fragment_topic.xml" value="0.2595108695652174" />
         <entry key="app/src/main/res/layout/fragment_treding_hits.xml" value="0.2694746376811594" />
         <entry key="app/src/main/res/layout/fragment_trending_hits.xml" value="0.2557291666666667" />
-        <entry key="app/src/main/res/layout/part_playlist.xml" value="0.2557291666666667" />
+        <entry key="app/src/main/res/layout/frangment_album.xml" value="0.266304347826087" />
+        <entry key="app/src/main/res/layout/part_album.xml" value="0.266304347826087" />
+        <entry key="app/src/main/res/layout/part_playlist.xml" value="0.34195098876953123" />
         <entry key="app/src/main/res/layout/part_trending.xml" value="0.2205810546875" />
         <entry key="app/src/main/res/menu/menu_bottom_navigation.xml" value="0.2557291666666667" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.2005" />

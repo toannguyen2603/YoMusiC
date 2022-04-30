@@ -7,22 +7,22 @@
     >
 
     <TextView
-        android:id="@+id/textTitlePlayList"
+        android:id="@+id/textTitleAlbum"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
         android:layout_marginTop="15dp"
         android:layout_marginBottom="15dp"
-        android:fontFamily="@font/roboto_slab_bold_pkgr"
-        android:text="Topic and Playlist"
         android:textColor="@color/white"
+        android:fontFamily="@font/roboto_slab_bold_pkgr"
+        android:text="Singer"
+        android:layout_marginLeft="10dp"
         android:textSize="24sp"
         android:textStyle="bold" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewPlayList"
+        android:id="@+id/recyclerViewSinger"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/textTitlePlayList" />
+        android:layout_below="@id/textTitleAlbum" />
 
 </RelativeLayout>
