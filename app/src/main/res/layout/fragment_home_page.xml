@@ -32,12 +32,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:layout="@layout/fragment_playlist" />
+
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/fragmentAlbum"
             android:name="huutoan.yomusic.Fragment.Fragment_Album"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:layout="@layout/fragment_album" />
+
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/fragmentCharts"
             android:layout_width="match_parent"
@@ -51,6 +53,14 @@
             android:layout_height="wrap_content"
             android:name="huutoan.yomusic.Fragment.Fragment_Topic"
             tools:layout="@layout/fragment_topic"
+            />
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/fragmentMostLikedSongs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:name="huutoan.yomusic.Fragment.Fragment_Most_Liked_Song"
+            tools:layout="@layout/fragment_most_liked_song"
             />
 
     </LinearLayout>
