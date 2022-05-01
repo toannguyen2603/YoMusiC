@@ -2,6 +2,7 @@ package huutoan.yomusic.Service;
 
 import java.util.List;
 
+import huutoan.yomusic.Model.Charts;
 import huutoan.yomusic.Model.PlayList;
 import huutoan.yomusic.Model.Singer;
 import huutoan.yomusic.Model.Topic;
@@ -23,6 +24,9 @@ public interface DataService {
 
     @GET("api/getAllAlbum")
     Call<List<Singer>> GetDataSinger();
+
+    @GET("api/getAllCategory")
+    Call<List<Charts>> GetDataCharts();
 
 
 
