@@ -26,7 +26,6 @@
             android:name="huutoan.yomusic.Fragment.Fragment_Trending_Hits"
             tools:layout ="@layout/fragment_trending_hits"
             />
-
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/fragmentPlayList"
             android:name="huutoan.yomusic.Fragment.Fragment_PlayList"
@@ -46,5 +45,13 @@
             android:name="huutoan.yomusic.Fragment.Fragment_Charts"
             tools:layout="@layout/fragment_charts"
             />
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/fragmentTopic"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:name="huutoan.yomusic.Fragment.Fragment_Topic"
+            tools:layout="@layout/fragment_topic"
+            />
+
     </LinearLayout>
 </ScrollView>

@@ -1,41 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:gravity="center"
+    >
 
-    <RelativeLayout
-        android:id="@+id/relativeTopic"
+    <TextView
+        android:id="@+id/textTitleTopic"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp"
-        >
-        <TextView
-            android:id="@+id/textTopic"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="TOPIC"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:textColor="#000000"
-            />
-        <TextView
-            android:id="@+id/seeMore"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="See more"
-            android:textSize="18sp"
-            android:textColor="#6C2DDC"
-            android:layout_alignParentRight="true"
-            />
-    </RelativeLayout>
-    <HorizontalScrollView
-        android:id="@+id/horizontalScrollView"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        android:fontFamily="@font/roboto_slab_bold_pkgr"
+        android:text="Fresh new music"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewTopic"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/relativeTopic"
-        android:scrollbars="none"
-        >
-
-    </HorizontalScrollView>
+        android:layout_below="@id/textTitleTopic" />
 
 </RelativeLayout>

@@ -11,10 +11,14 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import huutoan.yomusic.Adapter.PlayListAdapter;
+import huutoan.yomusic.Adapter.TopicAdapter;
 import huutoan.yomusic.Model.Topic;
 import huutoan.yomusic.R;
 import huutoan.yomusic.Service.APIService;
@@ -26,14 +30,17 @@ import retrofit2.Response;
 public class Fragment_Topic extends Fragment {
     View view;
     ArrayList<Topic> topics;
-    HorizontalScrollView horizontalScrollView;
-    TextView seeMore;
+    RecyclerView recyclerViewTopic;
+    TopicAdapter topicAdapter;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_topic, container,false);
-        horizontalScrollView = view.findViewById(R.id.horizontalScrollView);
-        seeMore = view.findViewById(R.id.seeMore);
+
+        recyclerViewTopic = view.findViewById(R.id.recyclerViewTopic);
+
+        getData();
         return  view;
     }
 
@@ -45,7 +52,13 @@ public class Fragment_Topic extends Fragment {
             @Override
             public void onResponse(Call<List<Topic>> call, Response<List<Topic>> response) {
                 topics = (ArrayList<Topic>) response.body();
-                Log.i("BBB", topics.get(0).getTitle());
+
+                topicAdapter = new TopicAdapter(getActivity() ,topics);
+
+                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+                linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+                recyclerViewTopic.setLayoutManager(linearLayoutManager);
+                recyclerViewTopic.setAdapter(topicAdapter);
             }
 
             @Override
