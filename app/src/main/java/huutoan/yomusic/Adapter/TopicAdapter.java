@@ -42,8 +42,10 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-
         topic = topicArrayList.get(position);
+        if (topic == null) {
+            return;
+        }
         holder.textViewTopic.setText(topic.getName());
         Picasso.get().load(topic.getImage()).into(holder.imageViewTopic);
     }

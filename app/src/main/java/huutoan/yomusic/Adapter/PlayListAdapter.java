@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,6 +16,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
+import huutoan.yomusic.Activity.ListSongActivity;
 import huutoan.yomusic.Model.PlayList;
 import huutoan.yomusic.R;
 
@@ -39,17 +41,19 @@ public class PlayListAdapter extends RecyclerView.Adapter<PlayListAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull PlayListAdapter.ViewHolder holder, int position) {
         PlayList playList = arrayListPlayList.get(position);
+        if (playList == null) {
+            return;
+        }
         holder.textPlayList.setText(playList.getName());
         Picasso.get().load(playList.getThumbnail()).into(holder.imagePlayList);
 
-//        view.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(context, DanhsachbaihatActivity.class);
-//                intent.putExtra("intentphobien", arrayListphobien.get(position));
-//                context.startActivity(intent);
-//            }
-//        });
+        view.setOnClickListener(view -> {
+
+                Intent intent = new Intent(context, ListSongActivity.class);
+                intent.putExtra("playlist", arrayListPlayList.get(position));
+                context.startActivity(intent);
+
+        });
     }
 
     @Override

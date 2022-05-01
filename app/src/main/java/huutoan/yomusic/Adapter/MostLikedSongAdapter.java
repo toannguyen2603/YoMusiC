@@ -44,9 +44,9 @@ public class MostLikedSongAdapter extends RecyclerView.Adapter<MostLikedSongAdap
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         mostLikedSongs = mostLikedSongsArrayList.get(position);
-
-        Log.i("song", mostLikedSongs.getNameSong());
-
+        if ( mostLikedSongs == null) {
+            return;
+        }
         holder.textArticle.setText(mostLikedSongs.getArtists());
         holder.textViewTitleMostLikedSong.setText(mostLikedSongs.getNameSong());
         Picasso.get().load(mostLikedSongs.getThumbnail()).into(holder.imageViewMostLikedSong);

@@ -39,6 +39,9 @@ public class SingerAdapter extends RecyclerView.Adapter<SingerAdapter.ViewHolder
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Singer singer = singerArrayList.get(position);
+        if (singer == null) {
+            return;
+        }
         holder.textViewSinger.setText(singer.getName());
         Picasso.get().load(singer.getThumbnail()).into(holder.imageViewSinger);
     }
