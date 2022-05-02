@@ -81,7 +81,7 @@ public class PlaySongActivity extends AppCompatActivity {
                     }
                 }
             }
-        }, 500);
+        }, 300);
         imgPlay.setOnClickListener((View view) -> {
 //            check media is running
             if (mediaPlayer.isPlaying()) {

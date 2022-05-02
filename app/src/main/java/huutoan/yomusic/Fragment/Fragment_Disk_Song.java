@@ -28,12 +28,12 @@ public class Fragment_Disk_Song extends Fragment {
         view = inflater.inflate(R.layout.fragment_disk_song, container,false);
 
         circleImageViewPlaySong = view.findViewById(R.id.imageCirclePlaySong);
-        objectAnimator = ObjectAnimator.ofFloat(circleImageViewPlaySong, "rotation",0f,360f);
-        objectAnimator.setDuration(10000);
+        objectAnimator = ObjectAnimator.ofFloat(circleImageViewPlaySong, "rotation", 0f, 360f);
+        objectAnimator.setDuration(20000);
         objectAnimator.setRepeatCount(ValueAnimator.INFINITE);
         objectAnimator.setRepeatMode(ValueAnimator.RESTART);
         objectAnimator.setInterpolator(new LinearInterpolator());
-
+        objectAnimator.start();
         return view;
     }
 
