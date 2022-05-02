@@ -12,6 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.squareup.picasso.Picasso;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 import huutoan.yomusic.R;
 
@@ -34,4 +36,9 @@ public class Fragment_Disk_Song extends Fragment {
 
         return view;
     }
+
+    public void ImageSong(String image) {
+        Picasso.get().load(image).into(circleImageViewPlaySong);
+    }
+
 }
