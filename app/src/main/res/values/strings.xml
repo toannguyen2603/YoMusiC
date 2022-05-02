@@ -4,5 +4,6 @@
     <string name="search_page">Search</string>
     <string name="library_page">Your library</string>
     <string name="account">Account</string>
+    <string name="image_song">Image Song</string>
 
 </resources>

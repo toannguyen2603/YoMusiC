@@ -14,7 +14,6 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-import huutoan.yomusic.Model.PlayList;
 import huutoan.yomusic.Model.Topic;
 import huutoan.yomusic.R;
 

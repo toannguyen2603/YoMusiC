@@ -1,6 +1,7 @@
 package huutoan.yomusic.Fragment;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import huutoan.yomusic.Adapter.PlayListAdapter;
-import huutoan.yomusic.Model.PlayList;
+import huutoan.yomusic.Model.PlayListSong;
 import huutoan.yomusic.R;
 import huutoan.yomusic.Service.APIService;
 import huutoan.yomusic.Service.DataService;
@@ -33,7 +34,7 @@ public class Fragment_PlayList extends Fragment {
     RecyclerView recyclerViewPlayList;
 
     PlayListAdapter playListAdapter;
-    ArrayList<PlayList> playLists;
+    ArrayList<PlayListSong> playLists;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -51,16 +52,15 @@ public class Fragment_PlayList extends Fragment {
         DataService dataService = APIService.getService();
 
 //        get list data through the service
-        Call<List<PlayList>> callback = dataService.GetDataPlayList();
-        callback.enqueue(new Callback<List<PlayList>>() {
+        Call<List<PlayListSong>> callback = dataService.GetDataSongPlayList();
+        callback.enqueue(new Callback<List<PlayListSong>>() {
 
 //            get data response
             @Override
-            public void onResponse(Call<List<PlayList>> call, Response<List<PlayList>> response) {
-                playLists = (ArrayList<PlayList>) response.body();
+            public void onResponse(Call<List<PlayListSong>> call, Response<List<PlayListSong>> response) {
+                playLists = (ArrayList<PlayListSong>) response.body();
 
                 playListAdapter = new PlayListAdapter(getActivity() ,playLists);
-
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
                 linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
                 recyclerViewPlayList.setLayoutManager(linearLayoutManager);
@@ -68,7 +68,7 @@ public class Fragment_PlayList extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<List<PlayList>> call, Throwable t) {
+            public void onFailure(Call<List<PlayListSong>> call, Throwable t) {
 
             }
         });

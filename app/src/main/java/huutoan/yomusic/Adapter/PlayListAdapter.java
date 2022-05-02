@@ -17,15 +17,15 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 import huutoan.yomusic.Activity.ListSongActivity;
-import huutoan.yomusic.Model.PlayList;
+import huutoan.yomusic.Model.PlayListSong;
 import huutoan.yomusic.R;
 
 public class PlayListAdapter extends RecyclerView.Adapter<PlayListAdapter.ViewHolder> {
     View view;
     Context context;
-    ArrayList<PlayList> arrayListPlayList;
+    ArrayList<PlayListSong> arrayListPlayList;
 
-    public PlayListAdapter(Context context, ArrayList<PlayList> arrayListPlayList) {
+    public PlayListAdapter(Context context, ArrayList<PlayListSong> arrayListPlayList) {
         this.context = context;
         this.arrayListPlayList = arrayListPlayList;
     }
@@ -40,7 +40,7 @@ public class PlayListAdapter extends RecyclerView.Adapter<PlayListAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull PlayListAdapter.ViewHolder holder, int position) {
-        PlayList playList = arrayListPlayList.get(position);
+        PlayListSong playList = arrayListPlayList.get(position);
         if (playList == null) {
             return;
         }
@@ -52,6 +52,7 @@ public class PlayListAdapter extends RecyclerView.Adapter<PlayListAdapter.ViewHo
                 Intent intent = new Intent(context, ListSongActivity.class);
                 intent.putExtra("playlist", arrayListPlayList.get(position));
                 context.startActivity(intent);
+
 
         });
     }

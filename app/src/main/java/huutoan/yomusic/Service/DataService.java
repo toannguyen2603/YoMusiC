@@ -4,7 +4,7 @@ import java.util.List;
 
 import huutoan.yomusic.Model.Charts;
 import huutoan.yomusic.Model.MostLikedSongs;
-import huutoan.yomusic.Model.PlayList;
+import huutoan.yomusic.Model.PlayListSong;
 import huutoan.yomusic.Model.Singer;
 import huutoan.yomusic.Model.Topic;
 import huutoan.yomusic.Model.Trending;
@@ -16,8 +16,8 @@ public interface DataService {
     @GET("api/getAllTrending")
     Call<List<Trending>> GetDataTrending();
 
-    @GET("api/getAllPlayList")
-    Call<List<PlayList>> GetDataPlayList();
+    @GET("api/getSongPlayList")
+    Call<List<PlayListSong>> GetDataSongPlayList();
 
     @GET("api/getAllTopic")
     Call<List<Topic>> GetDataTopic();
