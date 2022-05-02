@@ -4,13 +4,18 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
+
+import java.util.ArrayList;
 
 import huutoan.yomusic.Model.MostLikedSongs;
 import huutoan.yomusic.Model.Song;
 import huutoan.yomusic.R;
 
 public class PlaySongActivity extends AppCompatActivity {
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,8 +29,15 @@ public class PlaySongActivity extends AppCompatActivity {
         } else if (intent.hasExtra("getSongLike")) {
             MostLikedSongs mostLikedSongs = (MostLikedSongs) intent.getSerializableExtra("getSongLike");
             Toast.makeText(this, mostLikedSongs.getNameSong(), Toast.LENGTH_SHORT).show();
-        } else {
+        } else if(intent.hasExtra("getAllSong")){
+            ArrayList<Song> songArrayList = intent.getParcelableArrayListExtra("getAllSong");
+            for(int i = 0; i < songArrayList.size(); i++) {
+                Log.i("sss", songArrayList.get(i).getNameSong());
+            }
+        } else  {
             return;
         }
+
+
     }
 }

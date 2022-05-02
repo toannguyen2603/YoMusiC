@@ -45,9 +45,8 @@ public class ListSongActivity extends AppCompatActivity {
     ImageView imageViewListSong;
     PlayListSong playListSong;
 
-
     ListSongAdapter listSongAdapter;
-    ArrayList<Song> songs;
+    ArrayList<Song> songArrayList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,14 +56,12 @@ public class ListSongActivity extends AppCompatActivity {
         getLayout();
         GetDataIntent();
 
-        Log.d("Listof", playListSong.getImage());
-
         init();
         if(playListSong != null & !playListSong.getName().equals("")) {
-            Log.d("Run", "Is running");
             setDataInView(playListSong.getName(), playListSong.getImage());
             getDataInTopic();
         }
+
     }
     private void getLayout(){
         toolbar = findViewById(R.id.ToolbarList);
@@ -88,31 +85,29 @@ public class ListSongActivity extends AppCompatActivity {
         collapsingToolbarLayout.setExpandedTitleColor(Color.WHITE);
         collapsingToolbarLayout.setCollapsedTitleTextColor(Color.WHITE);
         collapsingToolbarLayout.setExpandedTitleTextAppearance(R.style.ExpandedAppBar);
+        floatingActionButton.setEnabled(false);
 
     }
 
 
     public void setDataInView(String name, String image){
         collapsingToolbarLayout.setTitle(name);
-
         Picasso.get().load(image).into(imageViewListSong);
     }
 
 
     public void getDataInTopic(){
-        songs = (ArrayList<Song>) playListSong.getSongs();
+        songArrayList = (ArrayList<Song>) playListSong.getSongs();
 
-        listSongAdapter = new ListSongAdapter(ListSongActivity.this, songs);
+        listSongAdapter = new ListSongAdapter(ListSongActivity.this, songArrayList);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(ListSongActivity.this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerViewListSong.setLayoutManager(linearLayoutManager);
-
 //                set adapter for recycle view
         recyclerViewListSong.setAdapter(listSongAdapter);
+        setEvenClick();
     }
-
-
 
     private void GetDataIntent(){
         Intent intent = getIntent();
@@ -122,5 +117,14 @@ public class ListSongActivity extends AppCompatActivity {
                 Toast.makeText(this,playListSong.getName(), Toast.LENGTH_SHORT).show();
             }
         }
+    }
+
+    private void setEvenClick(){
+        floatingActionButton.setEnabled(true);
+        floatingActionButton.setOnClickListener((View view) -> {
+            Intent intent = new Intent(ListSongActivity.this, PlaySongActivity.class);
+            intent.putExtra("getAllSong", songArrayList);
+            startActivity(intent);
+        });
     }
 }
