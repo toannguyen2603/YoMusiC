@@ -69,19 +69,19 @@ public class PlaySongActivity extends AppCompatActivity {
 
     public void evenClick(){
         Handler handler = new Handler();
-//        handler.postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                if(addFragmentSong.createFragment(1) != null) {
-//                    if(songArrayListSong.size() > 0) {
-//                        fragment_disk_song.ImageSong(songArrayListSong.get(0).getThumbnail());
-//                        handler.removeCallbacks(this);
-//                    } else {
-//                        handler.postDelayed(this, 300);
-//                    }
-//                }
-//            }
-//        }, 500);
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if(addFragmentSong.createFragment(0) != null) {
+                    if(songArrayListSong.size() > 0) {
+                        fragment_disk_song.ImageSong(songArrayListSong.get(0).getThumbnail());
+                        handler.removeCallbacks(this);
+                    } else {
+                        handler.postDelayed(this, 300);
+                    }
+                }
+            }
+        }, 500);
         imgPlay.setOnClickListener((View view) -> {
 //            check media is running
             if (mediaPlayer.isPlaying()) {
@@ -120,8 +120,7 @@ public class PlaySongActivity extends AppCompatActivity {
         addFragmentSong.addFragment(fragment_play_list_songs);
         viewPagerPlaySong.setAdapter(addFragmentSong);
 
-
-//        fragment_disk_song = (Fragment_Disk_Song) addFragmentSong.createFragment(1);
+        fragment_disk_song = (Fragment_Disk_Song) addFragmentSong.createFragment(0);
 
 //        play first song
         if(songArrayListSong.size() > 0) {
@@ -133,7 +132,6 @@ public class PlaySongActivity extends AppCompatActivity {
 
     private void getDataFromIntent(){
         Intent intent = getIntent();
-
 //        Delete old data to avoid overlapping
         songArrayListSong.clear();
 
