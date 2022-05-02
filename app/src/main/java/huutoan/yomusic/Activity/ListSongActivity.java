@@ -3,6 +3,7 @@ package huutoan.yomusic.Activity;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
@@ -12,6 +13,7 @@ import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -26,6 +28,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Objects;
 
+import huutoan.yomusic.Adapter.ListSongAdapter;
+import huutoan.yomusic.Adapter.MostLikedSongAdapter;
 import huutoan.yomusic.Model.PlayListSong;
 import huutoan.yomusic.Model.Song;
 import huutoan.yomusic.R;
@@ -41,6 +45,8 @@ public class ListSongActivity extends AppCompatActivity {
     ImageView imageViewListSong;
     PlayListSong playListSong;
 
+
+    ListSongAdapter listSongAdapter;
     ArrayList<Song> songs;
 
     @Override
@@ -51,9 +57,10 @@ public class ListSongActivity extends AppCompatActivity {
         getLayout();
         GetDataIntent();
 
-        Log.d("AAA", playListSong.getName());
+        Log.d("Listof", playListSong.getImage());
+
         init();
-        if(playListSong != null) {
+        if(playListSong != null & !playListSong.getName().equals("")) {
             Log.d("Run", "Is running");
             setDataInView(playListSong.getName(), playListSong.getImage());
             getDataInTopic();
@@ -70,6 +77,7 @@ public class ListSongActivity extends AppCompatActivity {
     }
 
     private void init(){
+
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
             Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
@@ -79,36 +87,30 @@ public class ListSongActivity extends AppCompatActivity {
         });
         collapsingToolbarLayout.setExpandedTitleColor(Color.WHITE);
         collapsingToolbarLayout.setCollapsedTitleTextColor(Color.WHITE);
-        collapsingToolbarLayout.setStatusBarScrimColor(getResources().getColor(R.color.bar_trans));
+        collapsingToolbarLayout.setExpandedTitleTextAppearance(R.style.ExpandedAppBar);
 
     }
 
 
     public void setDataInView(String name, String image){
-
         collapsingToolbarLayout.setTitle(name);
-        try {
 
-            URL url = new URL(image);
-            Bitmap bitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-            BitmapDrawable bitmapDrawable = new BitmapDrawable(getResources(), bitmap);
-
-//            set background collapsing
-            collapsingToolbarLayout.setBackground(bitmapDrawable);
-
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
         Picasso.get().load(image).into(imageViewListSong);
     }
 
 
     public void getDataInTopic(){
         songs = (ArrayList<Song>) playListSong.getSongs();
-        Log.d("BBB", songs.get(0).getArtists());
-    };
+
+        listSongAdapter = new ListSongAdapter(ListSongActivity.this, songs);
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(ListSongActivity.this);
+        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        recyclerViewListSong.setLayoutManager(linearLayoutManager);
+
+//                set adapter for recycle view
+        recyclerViewListSong.setAdapter(listSongAdapter);
+    }
 
 
 

@@ -48,7 +48,6 @@ public class PlayListAdapter extends RecyclerView.Adapter<PlayListAdapter.ViewHo
         Picasso.get().load(playList.getThumbnail()).into(holder.imagePlayList);
 
         view.setOnClickListener(view -> {
-
                 Intent intent = new Intent(context, ListSongActivity.class);
                 intent.putExtra("playlist", arrayListPlayList.get(position));
                 context.startActivity(intent);
