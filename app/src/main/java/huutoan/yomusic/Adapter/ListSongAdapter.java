@@ -1,6 +1,8 @@
 package huutoan.yomusic.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,8 +14,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
+import huutoan.yomusic.Activity.PlaySongActivity;
 import huutoan.yomusic.Model.Song;
 import huutoan.yomusic.R;
 
@@ -68,7 +72,9 @@ public class ListSongAdapter extends RecyclerView.Adapter<ListSongAdapter.ViewHo
             textArticleListSong = itemView.findViewById(R.id.textViewArticleListSong);
 
             itemView.setOnClickListener((View view) -> {
-
+                Intent intent = new Intent(context, PlaySongActivity.class);
+                intent.putExtra("getSong", (Parcelable) songArrayList.get(getPosition()));
+                context.startActivity(intent);
             });
         }
     }

@@ -3,7 +3,9 @@ package huutoan.yomusic.Model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class MostLikedSongs {
+import java.io.Serializable;
+
+public class MostLikedSongs implements Serializable {
 
     @SerializedName("_id")
     @Expose

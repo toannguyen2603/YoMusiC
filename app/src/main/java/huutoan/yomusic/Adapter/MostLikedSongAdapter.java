@@ -1,6 +1,8 @@
 package huutoan.yomusic.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,9 +15,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
+import huutoan.yomusic.Activity.PlaySongActivity;
 import huutoan.yomusic.Model.MostLikedSongs;
+import huutoan.yomusic.Model.Song;
 import huutoan.yomusic.R;
 
 public class MostLikedSongAdapter extends RecyclerView.Adapter<MostLikedSongAdapter.ViewHolder> {
@@ -24,8 +30,6 @@ public class MostLikedSongAdapter extends RecyclerView.Adapter<MostLikedSongAdap
     Context context;
     ArrayList<MostLikedSongs> mostLikedSongsArrayList;
     MostLikedSongs mostLikedSongs;
-
-
 
     public MostLikedSongAdapter(Context context, ArrayList<MostLikedSongs> mostLikedSongsArrayList){
         this.context = context;
@@ -67,6 +71,11 @@ public class MostLikedSongAdapter extends RecyclerView.Adapter<MostLikedSongAdap
             imageViewMostLikedSong = itemView.findViewById(R.id.imageMostLikedSong);
             textViewTitleMostLikedSong = itemView.findViewById(R.id.textViewTitleMostLiked);
             textArticle = itemView.findViewById(R.id.textViewArticle);
+            itemView.setOnClickListener((View view) -> {
+                Intent intent = new Intent(context, PlaySongActivity.class);
+                intent.putExtra("getSongLike",  mostLikedSongsArrayList.get(getPosition()));
+                context.startActivity(intent);
+            });
         }
     }
 }

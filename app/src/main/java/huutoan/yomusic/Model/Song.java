@@ -1,11 +1,14 @@
 package huutoan.yomusic.Model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
-public class Song implements Serializable {
+public class Song implements Serializable, Parcelable {
 
 @SerializedName("_id")
 @Expose
@@ -47,7 +50,39 @@ private Integer v;
 @Expose
 private String like;
 
-public String getId() {
+    protected Song(Parcel in) {
+        id = in.readString();
+        nameSong = in.readString();
+        title = in.readString();
+        albumId = in.readString();
+        playlistId = in.readString();
+        artists = in.readString();
+        thumbnail = in.readString();
+        categoryId = in.readString();
+        link = in.readString();
+        createdAt = in.readString();
+        updatedAt = in.readString();
+        if (in.readByte() == 0) {
+            v = null;
+        } else {
+            v = in.readInt();
+        }
+        like = in.readString();
+    }
+
+    public static final Creator<Song> CREATOR = new Creator<Song>() {
+        @Override
+        public Song createFromParcel(Parcel in) {
+            return new Song(in);
+        }
+
+        @Override
+        public Song[] newArray(int size) {
+            return new Song[size];
+        }
+    };
+
+    public String getId() {
 return id;
 }
 
@@ -150,4 +185,31 @@ return like;
 public void setLike(String like) {
 this.like = like;
 }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(id);
+        parcel.writeString(nameSong);
+        parcel.writeString(title);
+        parcel.writeString(albumId);
+        parcel.writeString(playlistId);
+        parcel.writeString(artists);
+        parcel.writeString(thumbnail);
+        parcel.writeString(categoryId);
+        parcel.writeString(link);
+        parcel.writeString(createdAt);
+        parcel.writeString(updatedAt);
+        if (v == null) {
+            parcel.writeByte((byte) 0);
+        } else {
+            parcel.writeByte((byte) 1);
+            parcel.writeInt(v);
+        }
+        parcel.writeString(like);
+    }
 }
