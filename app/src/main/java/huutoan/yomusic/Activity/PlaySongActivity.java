@@ -23,6 +23,7 @@ import android.widget.Toast;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Random;
 
 import huutoan.yomusic.Adapter.ViewPagerPlaySong;
 import huutoan.yomusic.Fragment.Fragment_Disk_Song;
@@ -36,7 +37,7 @@ public class PlaySongActivity extends AppCompatActivity {
     Toolbar toolbarPlaySong;
     TextView textTimeSong, textTimeTotalSong;
     SeekBar seekBarTimeSong;
-    ImageButton imgPlay, imgShuffle, imgNext, imgPrevious;
+    ImageButton imgPlay, imgShuffle, imgNext, imgPrevious, imgRepeat;
     ViewPager2 viewPagerPlaySong;
     Fragment_Disk_Song fragment_disk_song;
     Fragment_Play_List_Songs fragment_play_list_songs;
@@ -49,6 +50,11 @@ public class PlaySongActivity extends AppCompatActivity {
 
 //    play some music
     MediaPlayer mediaPlayer;
+
+    int position = 0;
+    boolean repeat = false;
+    boolean checkRandom = false;
+    boolean nextSong = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +70,7 @@ public class PlaySongActivity extends AppCompatActivity {
 
         getDataFromIntent();
         initLayout();
+        initDataInView();
         evenClick();
     }
 
@@ -92,7 +99,160 @@ public class PlaySongActivity extends AppCompatActivity {
                 imgPlay.setImageResource(R.drawable.pause);
             }
         });
+//        click repeat
+        imgRepeat.setOnClickListener((View view) -> {
+            if (repeat == false) {
+                if (checkRandom == true) {
+                    checkRandom = false;
+                    imgRepeat.setImageResource(R.drawable.repeat_violet);
+                    imgShuffle.setImageResource(R.drawable.shuffle);
+                }
+                imgRepeat.setImageResource(R.drawable.repeat_violet);
+                repeat = true;
+            } else {
+                imgRepeat.setImageResource(R.drawable.repeat);
+                repeat = false;
+            }
+        });
+
+//        click random song
+        imgShuffle.setOnClickListener((View view) -> {
+            if (checkRandom == false) {
+                if (repeat == true) {
+                    repeat = false;
+                    imgShuffle.setImageResource(R.drawable.shuffle_violet);
+                    imgRepeat.setImageResource(R.drawable.repeat);
+                }
+                imgShuffle.setImageResource(R.drawable.shuffle_violet);
+                checkRandom = true;
+            } else {
+                imgShuffle.setImageResource(R.drawable.shuffle);
+                checkRandom = false;
+            }
+        });
+
+//        seek bar time
+        seekBarTimeSong.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+
+            }
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                mediaPlayer.seekTo(seekBar.getProgress());
+            }
+        });
+
+
+        imgNext.setOnClickListener((View view) -> {
+
+            if (songArrayListSong.size() > 0 ) {
+
+                if (mediaPlayer.isPlaying() || mediaPlayer != null) {
+                    mediaPlayer.stop();
+                    mediaPlayer.release();
+                    mediaPlayer = null;
+                }
+
+                if (position < (songArrayListSong.size())) {
+
+                    imgPlay.setImageResource(R.drawable.pause);
+
+                    position++;
+                    if (repeat == true) {
+
+                        if (position == 0) {
+                            position = songArrayListSong.size();
+                        }
+                        position -= 1;
+                    } else if (checkRandom == true) {
+                        Random random = new Random();
+                        int index = random.nextInt(songArrayListSong.size());
+
+                        if(index == position) {
+                            position = index - 1;
+                        }
+                        position = index;
+                    } else if (position > (songArrayListSong.size() - 1)) {
+                        position = 0;
+                    } else  {
+                        return;
+                    }
+
+                    new playMusic().execute(songArrayListSong.get(position).getLink());
+                    fragment_disk_song.ImageSong(songArrayListSong.get(position).getThumbnail());
+                    getSupportActionBar().setTitle(songArrayListSong.get(position).getNameSong());
+                }
+
+
+                imgPrevious.setClickable(false);
+                imgNext.setClickable(false);
+                Handler handler1 = new Handler();
+                handler1.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        imgPrevious.setClickable(false);
+                        imgNext.setClickable(false);
+                    }
+                },5000);
+
+            }
+        });
+        imgPrevious.setOnClickListener((View view) -> {
+            if (songArrayListSong.size() > 0 ) {
+
+                if (mediaPlayer.isPlaying() || mediaPlayer != null) {
+                    mediaPlayer.stop();
+                    mediaPlayer.release();
+                    mediaPlayer = null;
+                }
+
+                if (position < (songArrayListSong.size())) {
+                    imgPlay.setImageResource(R.drawable.pause);
+                    position--;
+                    if (position < 0) {
+                        position = songArrayListSong.size() - 1;
+                    } else if (repeat == true) {
+                        if (position == 0) {
+                            position = songArrayListSong.size();
+                        }
+                        position += 1;
+                    } else if (checkRandom == true) {
+                        Random random = new Random();
+                        int index = random.nextInt(songArrayListSong.size());
+
+                        if(index == position) {
+                            position = index - 1;
+                        }
+                        position = index;
+                    }
+
+                    new playMusic().execute(songArrayListSong.get(position).getLink());
+                    fragment_disk_song.ImageSong(songArrayListSong.get(position).getThumbnail());
+                    getSupportActionBar().setTitle(songArrayListSong.get(position).getNameSong());
+                }
+
+                imgPrevious.setClickable(false);
+                imgNext.setClickable(false);
+                Handler handler1 = new Handler();
+                handler1.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        imgPrevious.setClickable(false);
+                        imgNext.setClickable(false);
+                    }
+                },5000);
+
+            }
+        });
+
     }
+
+
 
     private void initLayout() {
         toolbarPlaySong = findViewById(R.id.toolBarPlaySong);
@@ -102,13 +262,18 @@ public class PlaySongActivity extends AppCompatActivity {
         imgPlay = findViewById(R.id.imageButtonPlayOfPause);
         imgNext = findViewById(R.id.imageButtonNext);
         imgPrevious = findViewById(R.id.imageButtonPrevious);
-        imgShuffle = findViewById(R.id.imageButtonPrevious);
+        imgShuffle = findViewById(R.id.imageButtonShuffle);
+        imgRepeat = findViewById(R.id.imageButtonLoop);
         viewPagerPlaySong = findViewById(R.id.viewPagerDiskSong);
+    }
 
+    private void initDataInView(){
         setSupportActionBar(toolbarPlaySong);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbarPlaySong.setNavigationOnClickListener((View view) -> {
             finish();
+            mediaPlayer.stop();
+            songArrayListSong.clear();
         });
 
         toolbarPlaySong.setTitleTextColor(Color.WHITE);
@@ -143,12 +308,11 @@ public class PlaySongActivity extends AppCompatActivity {
             } else if (intent.hasExtra("getSongLike")) {
                 MostLikedSongs mostLikedSongs = (MostLikedSongs) intent.getSerializableExtra("getSongLike");
 
-            } else if(intent.hasExtra("getAllSong")){
+            } else if (intent.hasExtra("getAllSong")){
+
                 ArrayList<Song> songsArray = intent.getParcelableArrayListExtra("getAllSong");
-                for(int i = 0; i < songsArray.size(); i++) {
-                    Log.d("ass", songsArray.get(i).getNameSong() );
-                }
                 songArrayListSong = songsArray;
+
             } else  {
                 return;
             }

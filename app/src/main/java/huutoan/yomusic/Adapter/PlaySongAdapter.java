@@ -51,7 +51,7 @@ public class PlaySongAdapter extends RecyclerView.Adapter<PlaySongAdapter.ViewHo
 
     @Override
     public int getItemCount() {
-        return songArrayList.size();
+        return songArrayList != null ? songArrayList.size() : 0;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
