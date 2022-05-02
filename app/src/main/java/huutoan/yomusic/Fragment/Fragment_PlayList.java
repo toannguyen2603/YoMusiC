@@ -61,9 +61,11 @@ public class Fragment_PlayList extends Fragment {
                 playLists = (ArrayList<PlayListSong>) response.body();
 
                 playListAdapter = new PlayListAdapter(getActivity() ,playLists);
+
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
                 linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
                 recyclerViewPlayList.setLayoutManager(linearLayoutManager);
+
                 recyclerViewPlayList.setAdapter(playListAdapter);
             }
 

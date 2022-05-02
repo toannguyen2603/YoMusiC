@@ -36,10 +36,12 @@
         <entry key="app/src/main/res/layout/fragment_account.xml" value="0.2557291666666667" />
         <entry key="app/src/main/res/layout/fragment_album.xml" value="0.266304347826087" />
         <entry key="app/src/main/res/layout/fragment_charts.xml" value="0.266304347826087" />
+        <entry key="app/src/main/res/layout/fragment_disk_song.xml" value="0.2833333333333333" />
         <entry key="app/src/main/res/layout/fragment_home_page.xml" value="0.2557291666666667" />
         <entry key="app/src/main/res/layout/fragment_library.xml" value="0.2557291666666667" />
         <entry key="app/src/main/res/layout/fragment_most_liked_song.xml" value="0.266304347826087" />
         <entry key="app/src/main/res/layout/fragment_new_music.xml" value="0.266304347826087" />
+        <entry key="app/src/main/res/layout/fragment_play_list_songs.xml" value="0.2833333333333333" />
         <entry key="app/src/main/res/layout/fragment_playlist.xml" value="0.2557291666666667" />
         <entry key="app/src/main/res/layout/fragment_search.xml" value="0.2557291666666667" />
         <entry key="app/src/main/res/layout/fragment_topic.xml" value="0.2595108695652174" />
@@ -51,6 +53,7 @@
         <entry key="app/src/main/res/layout/part_list_song.xml" value="0.26313405797101447" />
         <entry key="app/src/main/res/layout/part_most_liked_song.xml" value="0.28382568359375004" />
         <entry key="app/src/main/res/layout/part_new_music.xml" value="0.266304347826087" />
+        <entry key="app/src/main/res/layout/part_play_songs.xml" value="0.2833333333333333" />
         <entry key="app/src/main/res/layout/part_playlist.xml" value="0.34195098876953123" />
         <entry key="app/src/main/res/layout/part_topic.xml" value="0.266304347826087" />
         <entry key="app/src/main/res/layout/part_trending.xml" value="0.2205810546875" />
