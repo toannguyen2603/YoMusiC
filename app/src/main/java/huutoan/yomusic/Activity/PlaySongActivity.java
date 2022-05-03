@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
@@ -15,6 +17,7 @@ import android.os.Handler;
 import android.os.StrictMode;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.LinearInterpolator;
 import android.widget.ImageButton;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -34,6 +37,7 @@ import huutoan.yomusic.R;
 
 public class PlaySongActivity extends AppCompatActivity {
 
+    ObjectAnimator objectAnimator;
     Toolbar toolbarPlaySong;
     TextView textTimeSong, textTimeTotalSong;
     SeekBar seekBarTimeSong;
@@ -114,9 +118,14 @@ public class PlaySongActivity extends AppCompatActivity {
             if (mediaPlayer.isPlaying()) {
                 mediaPlayer.pause();
                 imgPlay.setImageResource(R.drawable.play_button);
+
+                fragment_disk_song.objectAnimator.cancel();
+
             } else  {
                 mediaPlayer.start();
                 imgPlay.setImageResource(R.drawable.pause);
+
+                fragment_disk_song.objectAnimator.start();
             }
         });
 
@@ -182,13 +191,9 @@ public class PlaySongActivity extends AppCompatActivity {
 
         imgNext.setOnClickListener((View view) -> {
 
-            Log.d("ArrayList", String.valueOf(songArrayListSong.size()));
-
-            Log.d("PositionSong", String.valueOf(position));
+            fragment_disk_song.objectAnimator.start();
 
             if (songArrayListSong.size() > 0 ) {
-
-                Log.d("CheckMedia", String.valueOf(mediaPlayer));
 
                 if (mediaPlayer.isPlaying() || mediaPlayer != null) {
                     mediaPlayer.stop();
@@ -225,12 +230,14 @@ public class PlaySongActivity extends AppCompatActivity {
                     if (position > (songArrayListSong.size() - 1)) {
                         position = 0;
                     }
+
                 }
 
                 new playMusic().execute(songArrayListSong.get(position).getLink());
                 fragment_disk_song.ImageSong(songArrayListSong.get(position).getThumbnail());
                 getSupportActionBar().setTitle(songArrayListSong.get(position).getNameSong());
 
+                UpdateTimePlaySong();
 
                 imgPrevious.setClickable(false);
                 imgNext.setClickable(false);
@@ -242,7 +249,7 @@ public class PlaySongActivity extends AppCompatActivity {
                         imgPrevious.setClickable(true);
                         imgNext.setClickable(true);
                     }
-                },5000);
+                },3000);
 
             }
         });
@@ -253,6 +260,9 @@ public class PlaySongActivity extends AppCompatActivity {
     private void eventClickPreviousSong() {
 
         imgPrevious.setOnClickListener((View view) -> {
+
+            fragment_disk_song.objectAnimator.start();
+
             if (songArrayListSong.size() > 0 ) {
 
                 if (mediaPlayer.isPlaying() || mediaPlayer != null) {
@@ -281,10 +291,13 @@ public class PlaySongActivity extends AppCompatActivity {
                         position = index;
                     }
 
-                    new playMusic().execute(songArrayListSong.get(position).getLink());
-                    fragment_disk_song.ImageSong(songArrayListSong.get(position).getThumbnail());
-                    getSupportActionBar().setTitle(songArrayListSong.get(position).getNameSong());
                 }
+
+                new playMusic().execute(songArrayListSong.get(position).getLink());
+                fragment_disk_song.ImageSong(songArrayListSong.get(position).getThumbnail());
+                getSupportActionBar().setTitle(songArrayListSong.get(position).getNameSong());
+
+                UpdateTimePlaySong();
 
                 imgPrevious.setClickable(false);
                 imgNext.setClickable(false);
@@ -295,7 +308,7 @@ public class PlaySongActivity extends AppCompatActivity {
                         imgPrevious.setClickable(true);
                         imgNext.setClickable(true);
                     }
-                },5000);
+                },3000);
 
             }
         });
@@ -370,7 +383,6 @@ public class PlaySongActivity extends AppCompatActivity {
 
                 songArrayListSong = songsArray;
 
-                Log.d("GetAllPosition", String.valueOf(songsArray.size()));
 
 
             } else  {
@@ -408,6 +420,7 @@ public class PlaySongActivity extends AppCompatActivity {
 
 //            update total time of song
             TimeSong();
+            UpdateTimePlaySong();
         }
 
     }
@@ -419,6 +432,88 @@ public class PlaySongActivity extends AppCompatActivity {
 
 //        drag seekbar -> update time for seekbar
         seekBarTimeSong.setMax(mediaPlayer.getDuration());
+    }
+
+    private void UpdateTimePlaySong() {
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if(mediaPlayer != null) {
+                    seekBarTimeSong.setProgress(mediaPlayer.getCurrentPosition());
+                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("mm:ss");
+                    textTimeSong.setText(simpleDateFormat.format(mediaPlayer.getCurrentPosition()));
+                    handler.postDelayed(this, 300);
+
+//                    complement song
+                    mediaPlayer.setOnCompletionListener(mediaPlayer -> {
+
+//                        next song
+                        nextSong = true;
+                        try {
+                            Thread.sleep(1000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    });
+                }
+            }
+        },300);
+
+//        switch song
+        Handler handler1 = new Handler();
+        handler1.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if(nextSong == true) {
+
+                    fragment_disk_song.objectAnimator.start();
+
+                    if (position < (songArrayListSong.size())) {
+                        imgPlay.setImageResource(R.drawable.pause);
+                        position++;
+                        if (position < 0) {
+                            position = songArrayListSong.size() - 1;
+                        } else if (repeat == true) {
+                            if (position == 0) {
+                                position = songArrayListSong.size();
+                            }
+                            position -= 1;
+                        } else if (checkRandom == true) {
+                            Random random = new Random();
+                            int index = random.nextInt(songArrayListSong.size());
+
+                            if(index == position) {
+                                position = index - 1;
+                            }
+                            position = index;
+                        }
+
+                        new playMusic().execute(songArrayListSong.get(position).getLink());
+                        fragment_disk_song.ImageSong(songArrayListSong.get(position).getThumbnail());
+                        getSupportActionBar().setTitle(songArrayListSong.get(position).getNameSong());
+                    }
+
+                    imgPrevious.setClickable(false);
+                    imgNext.setClickable(false);
+                    Handler handler1 = new Handler();
+                    handler1.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            imgPrevious.setClickable(true);
+                            imgNext.setClickable(true);
+                        }
+                    },3000);
+                    nextSong = false;
+
+//                    delete handler when get song
+                    handler1.removeCallbacks(this);
+
+                } else {
+                    handler1.postDelayed(this, 1000);
+                }
+            }
+        }, 1000);
     }
 
 

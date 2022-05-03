@@ -20,8 +20,8 @@ import huutoan.yomusic.R;
 public class Fragment_Disk_Song extends Fragment {
 
     View view;
-    CircleImageView circleImageViewPlaySong;
-    ObjectAnimator objectAnimator;
+    public CircleImageView circleImageViewPlaySong;
+    public ObjectAnimator objectAnimator;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -34,6 +34,7 @@ public class Fragment_Disk_Song extends Fragment {
         objectAnimator.setRepeatMode(ValueAnimator.RESTART);
         objectAnimator.setInterpolator(new LinearInterpolator());
         objectAnimator.start();
+
         return view;
     }
 

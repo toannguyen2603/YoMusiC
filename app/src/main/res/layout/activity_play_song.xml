@@ -104,7 +104,7 @@
         android:id="@+id/textViewRunTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="--:--"
+        android:text="00:00"
         android:textColor="#E4E4E4"
         android:textSize="18sp" />
 
