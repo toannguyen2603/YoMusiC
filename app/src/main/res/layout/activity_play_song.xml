@@ -163,7 +163,7 @@
          />
 
     <ImageButton
-        android:id="@+id/imageButtonNext"
+        android:id="@+id/imageButtonNextSong"
         android:layout_width="23dp"
         android:layout_height="23dp"
         android:layout_centerVertical="true"
@@ -180,7 +180,7 @@
         android:layout_height="30dp"
         android:layout_centerVertical="true"
         android:layout_marginStart="24dp"
-        android:layout_toEndOf="@+id/imageButtonNext"
+        android:layout_toEndOf="@+id/imageButtonNextSong"
         android:background="@null"
         android:contentDescription="@string/repeat"
         android:scaleType="fitXY"

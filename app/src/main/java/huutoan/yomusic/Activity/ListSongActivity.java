@@ -53,21 +53,25 @@ public class ListSongActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_song);
+
 //        check network
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
         getLayout();
-        GetDataIntent();
+
+        PutDataIntent();
 
         init();
+
         if(playListSong != null & !playListSong.getName().equals("")) {
             setDataInView(playListSong.getName(), playListSong.getImage());
             getDataInTopic();
         }
 
     }
-    private void getLayout(){
+    private void getLayout() {
+
         toolbar = findViewById(R.id.ToolbarList);
         coordinatorLayout = findViewById(R.id.coordinatorLayoutListSong);
         collapsingToolbarLayout = findViewById(R.id.collapsingToolbar);
@@ -101,6 +105,7 @@ public class ListSongActivity extends AppCompatActivity {
 
 
     public void getDataInTopic(){
+
         songArrayList = (ArrayList<Song>) playListSong.getSongs();
 
         listSongAdapter = new ListSongAdapter(ListSongActivity.this, songArrayList);
@@ -110,25 +115,34 @@ public class ListSongActivity extends AppCompatActivity {
         recyclerViewListSong.setLayoutManager(linearLayoutManager);
 //                set adapter for recycle view
         recyclerViewListSong.setAdapter(listSongAdapter);
-        setEvenClick();
+
+        setEvenClickFloating();
     }
 
-    private void GetDataIntent(){
+    private void PutDataIntent(){
+
         Intent intent = getIntent();
+
         if (intent != null){
+
             if (intent.hasExtra("playlist")) {
                 playListSong = (PlayListSong) intent.getSerializableExtra("playlist");
+
                 Toast.makeText(this,playListSong.getName(), Toast.LENGTH_SHORT).show();
             }
         }
     }
 
-    private void setEvenClick(){
+    private void setEvenClickFloating(){
+
         floatingActionButton.setEnabled(true);
+
         floatingActionButton.setOnClickListener((View view) -> {
+
             Intent intent = new Intent(ListSongActivity.this, PlaySongActivity.class);
-            intent.putExtra("getAllSong", songArrayList);
+            intent.putExtra("getAllSingOfSong", songArrayList);
             startActivity(intent);
+
         });
     }
 }

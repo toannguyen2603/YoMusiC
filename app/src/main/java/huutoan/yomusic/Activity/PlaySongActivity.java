@@ -6,12 +6,14 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.StrictMode;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.SeekBar;
@@ -20,6 +22,7 @@ import android.widget.TextView;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Random;
 
 import huutoan.yomusic.Adapter.ViewPagerPlaySong;
@@ -62,11 +65,11 @@ public class PlaySongActivity extends AppCompatActivity {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
+        initLayout();
+
         fragment_play_list_songs = new Fragment_Play_List_Songs();
         fragment_disk_song = new Fragment_Disk_Song();
-
         getDataFromIntent();
-        initLayout();
         initDataInView();
         evenClick();
     }
@@ -123,6 +126,7 @@ public class PlaySongActivity extends AppCompatActivity {
 
         //        click repeat
         imgRepeat.setOnClickListener((View view) -> {
+
             if (repeat == false) {
                 if (checkRandom == true) {
                     checkRandom = false;
@@ -174,13 +178,21 @@ public class PlaySongActivity extends AppCompatActivity {
         });
     }
 
-    private void eventClickNextSong(){
+    private void eventClickNextSong() {
+
         imgNext.setOnClickListener((View view) -> {
+
+            Log.d("ArrayList", String.valueOf(songArrayListSong.size()));
+
+            Log.d("PositionSong", String.valueOf(position));
 
             if (songArrayListSong.size() > 0 ) {
 
+                Log.d("CheckMedia", String.valueOf(mediaPlayer));
+
                 if (mediaPlayer.isPlaying() || mediaPlayer != null) {
                     mediaPlayer.stop();
+
                     mediaPlayer.release();
                     mediaPlayer = null;
                 }
@@ -190,13 +202,17 @@ public class PlaySongActivity extends AppCompatActivity {
                     imgPlay.setImageResource(R.drawable.pause);
 
                     position++;
+
                     if (repeat == true) {
 
                         if (position == 0) {
                             position = songArrayListSong.size();
                         }
                         position -= 1;
-                    } else if (checkRandom == true) {
+
+                    }
+
+                    if (checkRandom == true) {
                         Random random = new Random();
                         int index = random.nextInt(songArrayListSong.size());
 
@@ -204,34 +220,38 @@ public class PlaySongActivity extends AppCompatActivity {
                             position = index - 1;
                         }
                         position = index;
-                    } else if (position > (songArrayListSong.size() - 1)) {
-                        position = 0;
-                    } else  {
-                        return;
                     }
 
-                    new playMusic().execute(songArrayListSong.get(position).getLink());
-                    fragment_disk_song.ImageSong(songArrayListSong.get(position).getThumbnail());
-                    getSupportActionBar().setTitle(songArrayListSong.get(position).getNameSong());
+                    if (position > (songArrayListSong.size() - 1)) {
+                        position = 0;
+                    }
                 }
+
+                new playMusic().execute(songArrayListSong.get(position).getLink());
+                fragment_disk_song.ImageSong(songArrayListSong.get(position).getThumbnail());
+                getSupportActionBar().setTitle(songArrayListSong.get(position).getNameSong());
 
 
                 imgPrevious.setClickable(false);
                 imgNext.setClickable(false);
+
                 Handler handler1 = new Handler();
                 handler1.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        imgPrevious.setClickable(false);
-                        imgNext.setClickable(false);
+                        imgPrevious.setClickable(true);
+                        imgNext.setClickable(true);
                     }
                 },5000);
 
             }
         });
+
     }
 
-    private void eventClickPreviousSong(){
+
+    private void eventClickPreviousSong() {
+
         imgPrevious.setOnClickListener((View view) -> {
             if (songArrayListSong.size() > 0 ) {
 
@@ -272,8 +292,8 @@ public class PlaySongActivity extends AppCompatActivity {
                 handler1.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        imgPrevious.setClickable(false);
-                        imgNext.setClickable(false);
+                        imgPrevious.setClickable(true);
+                        imgNext.setClickable(true);
                     }
                 },5000);
 
@@ -282,24 +302,26 @@ public class PlaySongActivity extends AppCompatActivity {
     }
 
 
-
-
     private void initLayout() {
+
         toolbarPlaySong = findViewById(R.id.toolBarPlaySong);
         textTimeSong = findViewById(R.id.textViewRunTime);
         textTimeTotalSong = findViewById(R.id.textViewTimeTotal);
         seekBarTimeSong = findViewById(R.id.seekBarTime);
         imgPlay = findViewById(R.id.imageButtonPlayOfPause);
-        imgNext = findViewById(R.id.imageButtonNext);
+        imgNext = findViewById(R.id.imageButtonNextSong);
         imgPrevious = findViewById(R.id.imageButtonPrevious);
         imgShuffle = findViewById(R.id.imageButtonShuffle);
         imgRepeat = findViewById(R.id.imageButtonLoop);
         viewPagerPlaySong = findViewById(R.id.viewPagerDiskSong);
+
     }
 
     private void initDataInView(){
+
         setSupportActionBar(toolbarPlaySong);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+
         toolbarPlaySong.setNavigationOnClickListener((View view) -> {
             finish();
             mediaPlayer.stop();
@@ -322,26 +344,34 @@ public class PlaySongActivity extends AppCompatActivity {
             getSupportActionBar().setTitle(songArrayListSong.get(0).getNameSong());
             new playMusic().execute(songArrayListSong.get(0).getLink());
             imgPlay.setImageResource(R.drawable.pause);
+
         }
     }
 
+
     private void getDataFromIntent(){
         Intent intent = getIntent();
+
 //        Delete old data to avoid overlapping
         songArrayListSong.clear();
 
         if (intent != null) {
             if(intent.hasExtra("getSong")) {
                 Song song = intent.getParcelableExtra("getSong");
+
                 songArrayListSong.add(song);
 
             } else if (intent.hasExtra("getSongLike")) {
                 MostLikedSongs mostLikedSongs = (MostLikedSongs) intent.getSerializableExtra("getSongLike");
 
-            } else if (intent.hasExtra("getAllSong")){
+            } else if (intent.hasExtra("getAllSingOfSong")){
 
-                ArrayList<Song> songsArray = intent.getParcelableArrayListExtra("getAllSong");
+                ArrayList<Song> songsArray = intent.getParcelableArrayListExtra("getAllSingOfSong");
+
                 songArrayListSong = songsArray;
+
+                Log.d("GetAllPosition", String.valueOf(songsArray.size()));
+
 
             } else  {
                 return;
@@ -375,13 +405,15 @@ public class PlaySongActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
             mediaPlayer.start();
+
 //            update total time of song
             TimeSong();
         }
 
     }
 
-    private void TimeSong(){
+    private void TimeSong() {
+
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("mm:ss");
         textTimeTotalSong.setText(simpleDateFormat.format(mediaPlayer.getDuration()));
 
