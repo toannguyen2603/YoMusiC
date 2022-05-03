@@ -2,7 +2,6 @@ package huutoan.yomusic.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.content.Intent;
@@ -13,12 +12,10 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.StrictMode;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -39,11 +36,11 @@ public class PlaySongActivity extends AppCompatActivity {
     SeekBar seekBarTimeSong;
     ImageButton imgPlay, imgShuffle, imgNext, imgPrevious, imgRepeat;
     ViewPager2 viewPagerPlaySong;
+
     Fragment_Disk_Song fragment_disk_song;
     Fragment_Play_List_Songs fragment_play_list_songs;
 
     public static ArrayList<Song> songArrayListSong = new ArrayList<>();
-
     public static ViewPagerPlaySong addFragmentSong;
 
     Song nameSong;
@@ -75,8 +72,12 @@ public class PlaySongActivity extends AppCompatActivity {
     }
 
     public void evenClick(){
+
         Handler handler = new Handler();
+
+//        create delay when click event
         handler.postDelayed(new Runnable() {
+
             @Override
             public void run() {
                 if(addFragmentSong.createFragment(0) != null) {
@@ -89,6 +90,22 @@ public class PlaySongActivity extends AppCompatActivity {
                 }
             }
         }, 300);
+
+
+        eventSeekBarWithPlaySong();
+
+//        event for song
+        evenClickPlaySong();
+        evenClickRepeatSong();
+        evenClickRandomSong();
+        eventClickPreviousSong();
+        eventClickNextSong();
+
+    }
+
+
+    private void evenClickPlaySong(){
+
         imgPlay.setOnClickListener((View view) -> {
 //            check media is running
             if (mediaPlayer.isPlaying()) {
@@ -99,7 +116,12 @@ public class PlaySongActivity extends AppCompatActivity {
                 imgPlay.setImageResource(R.drawable.pause);
             }
         });
-//        click repeat
+
+    }
+
+    private void evenClickRepeatSong(){
+
+        //        click repeat
         imgRepeat.setOnClickListener((View view) -> {
             if (repeat == false) {
                 if (checkRandom == true) {
@@ -114,7 +136,9 @@ public class PlaySongActivity extends AppCompatActivity {
                 repeat = false;
             }
         });
+    }
 
+    private void evenClickRandomSong(){
 //        click random song
         imgShuffle.setOnClickListener((View view) -> {
             if (checkRandom == false) {
@@ -130,8 +154,10 @@ public class PlaySongActivity extends AppCompatActivity {
                 checkRandom = false;
             }
         });
+    }
 
-//        seek bar time
+    private void eventSeekBarWithPlaySong(){
+        //        seek bar time
         seekBarTimeSong.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
@@ -146,8 +172,9 @@ public class PlaySongActivity extends AppCompatActivity {
                 mediaPlayer.seekTo(seekBar.getProgress());
             }
         });
+    }
 
-
+    private void eventClickNextSong(){
         imgNext.setOnClickListener((View view) -> {
 
             if (songArrayListSong.size() > 0 ) {
@@ -202,6 +229,9 @@ public class PlaySongActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void eventClickPreviousSong(){
         imgPrevious.setOnClickListener((View view) -> {
             if (songArrayListSong.size() > 0 ) {
 
@@ -249,8 +279,8 @@ public class PlaySongActivity extends AppCompatActivity {
 
             }
         });
-
     }
+
 
 
 
