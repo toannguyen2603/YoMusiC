@@ -4,20 +4,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager2.widget.ViewPager2;
 
-import android.animation.ObjectAnimator;
-import android.animation.ValueAnimator;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
-import android.media.AudioManager;
+import android.media.AudioAttributes;
 import android.media.MediaPlayer;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.StrictMode;
-import android.util.Log;
 import android.view.View;
-import android.view.animation.LinearInterpolator;
 import android.widget.ImageButton;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -25,6 +21,7 @@ import android.widget.TextView;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Objects;
 import java.util.Random;
 
@@ -37,7 +34,6 @@ import huutoan.yomusic.R;
 
 public class PlaySongActivity extends AppCompatActivity {
 
-    ObjectAnimator objectAnimator;
     Toolbar toolbarPlaySong;
     TextView textTimeSong, textTimeTotalSong;
     SeekBar seekBarTimeSong;
@@ -50,7 +46,6 @@ public class PlaySongActivity extends AppCompatActivity {
     public static ArrayList<Song> songArrayListSong = new ArrayList<>();
     public static ViewPagerPlaySong addFragmentSong;
 
-    Song nameSong;
 
 //    play some music
     MediaPlayer mediaPlayer;
@@ -114,6 +109,7 @@ public class PlaySongActivity extends AppCompatActivity {
     private void evenClickPlaySong(){
 
         imgPlay.setOnClickListener((View view) -> {
+
 //            check media is running
             if (mediaPlayer.isPlaying()) {
                 mediaPlayer.pause();
@@ -201,61 +197,11 @@ public class PlaySongActivity extends AppCompatActivity {
                     mediaPlayer.release();
                     mediaPlayer = null;
                 }
-
-                if (position < (songArrayListSong.size())) {
-
-                    imgPlay.setImageResource(R.drawable.pause);
-
-                    position++;
-
-                    if (repeat == true) {
-
-                        if (position == 0) {
-                            position = songArrayListSong.size();
-                        }
-                        position -= 1;
-
-                    }
-
-                    if (checkRandom == true) {
-                        Random random = new Random();
-                        int index = random.nextInt(songArrayListSong.size());
-
-                        if(index == position) {
-                            position = index - 1;
-                        }
-                        position = index;
-                    }
-
-                    if (position > (songArrayListSong.size() - 1)) {
-                        position = 0;
-                    }
-
-                }
-
-                new playMusic().execute(songArrayListSong.get(position).getLink());
-                fragment_disk_song.ImageSong(songArrayListSong.get(position).getThumbnail());
-                getSupportActionBar().setTitle(songArrayListSong.get(position).getNameSong());
-
-                UpdateTimePlaySong();
-
-                imgPrevious.setClickable(false);
-                imgNext.setClickable(false);
-
-                Handler handler1 = new Handler();
-                handler1.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        imgPrevious.setClickable(true);
-                        imgNext.setClickable(true);
-                    }
-                },3000);
-
+                checkNextTime();
             }
         });
 
     }
-
 
     private void eventClickPreviousSong() {
 
@@ -295,19 +241,16 @@ public class PlaySongActivity extends AppCompatActivity {
 
                 new playMusic().execute(songArrayListSong.get(position).getLink());
                 fragment_disk_song.ImageSong(songArrayListSong.get(position).getThumbnail());
-                getSupportActionBar().setTitle(songArrayListSong.get(position).getNameSong());
+                Objects.requireNonNull(getSupportActionBar()).setTitle(songArrayListSong.get(position).getNameSong());
 
                 UpdateTimePlaySong();
 
                 imgPrevious.setClickable(false);
                 imgNext.setClickable(false);
                 Handler handler1 = new Handler();
-                handler1.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        imgPrevious.setClickable(true);
-                        imgNext.setClickable(true);
-                    }
+                handler1.postDelayed(() -> {
+                    imgPrevious.setClickable(true);
+                    imgNext.setClickable(true);
                 },3000);
 
             }
@@ -354,7 +297,7 @@ public class PlaySongActivity extends AppCompatActivity {
 
 //        play first song
         if(songArrayListSong.size() > 0) {
-            getSupportActionBar().setTitle(songArrayListSong.get(0).getNameSong());
+            Objects.requireNonNull(getSupportActionBar()).setTitle(songArrayListSong.get(0).getNameSong());
             new playMusic().execute(songArrayListSong.get(0).getLink());
             imgPlay.setImageResource(R.drawable.pause);
 
@@ -379,20 +322,14 @@ public class PlaySongActivity extends AppCompatActivity {
 
             } else if (intent.hasExtra("getAllSingOfSong")){
 
-                ArrayList<Song> songsArray = intent.getParcelableArrayListExtra("getAllSingOfSong");
-
-                songArrayListSong = songsArray;
-
-
-
-            } else  {
-                return;
+                songArrayListSong = intent.getParcelableArrayListExtra("getAllSingOfSong");
             }
-        } else { return; }
+        }
 
     }
 
-    class playMusic extends AsyncTask<String, Void, String> {
+   @SuppressLint("StaticFieldLeak")
+   public class playMusic extends AsyncTask<String, Void, String> {
         @Override
         protected String doInBackground(String... strings) {
             return strings[0];
@@ -403,7 +340,13 @@ public class PlaySongActivity extends AppCompatActivity {
             super.onPostExecute(song);
             try {
                 mediaPlayer = new MediaPlayer();
-                mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+
+                mediaPlayer.setAudioAttributes (
+                        new AudioAttributes.Builder()
+                                .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
+                                .setUsage(AudioAttributes.USAGE_MEDIA)
+                                .build());
+
                 mediaPlayer.setOnCompletionListener(mediaPlayer -> {
                     mediaPlayer.stop();
                     mediaPlayer.reset();
@@ -427,7 +370,7 @@ public class PlaySongActivity extends AppCompatActivity {
 
     private void TimeSong() {
 
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("mm:ss");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("mm:ss",Locale.getDefault());
         textTimeTotalSong.setText(simpleDateFormat.format(mediaPlayer.getDuration()));
 
 //        drag seekbar -> update time for seekbar
@@ -441,7 +384,8 @@ public class PlaySongActivity extends AppCompatActivity {
             public void run() {
                 if(mediaPlayer != null) {
                     seekBarTimeSong.setProgress(mediaPlayer.getCurrentPosition());
-                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("mm:ss");
+
+                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("mm:ss", Locale.getDefault());
                     textTimeSong.setText(simpleDateFormat.format(mediaPlayer.getCurrentPosition()));
                     handler.postDelayed(this, 300);
 
@@ -469,42 +413,7 @@ public class PlaySongActivity extends AppCompatActivity {
 
                     fragment_disk_song.objectAnimator.start();
 
-                    if (position < (songArrayListSong.size())) {
-                        imgPlay.setImageResource(R.drawable.pause);
-                        position++;
-                        if (position < 0) {
-                            position = songArrayListSong.size() - 1;
-                        } else if (repeat == true) {
-                            if (position == 0) {
-                                position = songArrayListSong.size();
-                            }
-                            position -= 1;
-                        } else if (checkRandom == true) {
-                            Random random = new Random();
-                            int index = random.nextInt(songArrayListSong.size());
-
-                            if(index == position) {
-                                position = index - 1;
-                            }
-                            position = index;
-                        }
-
-                        new playMusic().execute(songArrayListSong.get(position).getLink());
-                        fragment_disk_song.ImageSong(songArrayListSong.get(position).getThumbnail());
-                        getSupportActionBar().setTitle(songArrayListSong.get(position).getNameSong());
-                    }
-
-                    imgPrevious.setClickable(false);
-                    imgNext.setClickable(false);
-                    Handler handler1 = new Handler();
-                    handler1.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            imgPrevious.setClickable(true);
-                            imgNext.setClickable(true);
-                        }
-                    },3000);
-                    nextSong = false;
+                    checkNextTime();
 
 //                    delete handler when get song
                     handler1.removeCallbacks(this);
@@ -516,5 +425,41 @@ public class PlaySongActivity extends AppCompatActivity {
         }, 1000);
     }
 
+    public void checkNextTime() {
+
+        if (position < (songArrayListSong.size())) {
+            imgPlay.setImageResource(R.drawable.pause);
+            position++;
+            if (position < 0) {
+                position = songArrayListSong.size() - 1;
+            } else if (repeat == true) {
+                if (position == 0) {
+                    position = songArrayListSong.size();
+                }
+                position -= 1;
+            } else if (checkRandom == true) {
+                Random random = new Random();
+                int index = random.nextInt(songArrayListSong.size());
+
+                if(index == position) {
+                    position = index - 1;
+                }
+                position = index;
+            }
+
+            new playMusic().execute(songArrayListSong.get(position).getLink());
+            fragment_disk_song.ImageSong(songArrayListSong.get(position).getThumbnail());
+            Objects.requireNonNull(getSupportActionBar()).setTitle(songArrayListSong.get(position).getNameSong());
+        }
+
+        imgPrevious.setClickable(false);
+        imgNext.setClickable(false);
+        Handler handler1 = new Handler();
+        handler1.postDelayed(() -> {
+            imgPrevious.setClickable(true);
+            imgNext.setClickable(true);
+        },3000);
+        nextSong = false;
+    }
 
 }
