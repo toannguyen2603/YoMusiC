@@ -1,7 +1,6 @@
 package huutoan.yomusic.Fragment;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,9 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-import huutoan.yomusic.Adapter.ChartsAdapter;
 import huutoan.yomusic.Adapter.MostLikedSongAdapter;
-import huutoan.yomusic.Model.MostLikedSongs;
+import huutoan.yomusic.Model.Song;
 import huutoan.yomusic.R;
 import huutoan.yomusic.Service.APIService;
 import huutoan.yomusic.Service.DataService;
@@ -30,7 +28,7 @@ public class Fragment_Most_Liked_Song extends Fragment {
     View view;
     RecyclerView recyclerViewLikeSong;
     MostLikedSongAdapter mostLikedSongAdapter;
-    ArrayList<MostLikedSongs> mostLikedSongs;
+    ArrayList<Song> mostLikedSongs;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -45,13 +43,13 @@ public class Fragment_Most_Liked_Song extends Fragment {
 
     public void GetData(){
         DataService dataService = APIService.getService();
-        Call<List<MostLikedSongs>> callback = dataService.GetDataMostLikedSongsCurrent();
+        Call<List<Song>> callback = dataService.GetDataMostLikedSongsCurrent();
 
-        callback.enqueue(new Callback<List<MostLikedSongs>>() {
+        callback.enqueue(new Callback<List<Song>>() {
             @Override
-            public void onResponse(Call<List<MostLikedSongs>> call, Response<List<MostLikedSongs>> response) {
+            public void onResponse(@NonNull Call<List<Song>> call, @NonNull Response<List<Song>> response) {
 
-                mostLikedSongs = (ArrayList<MostLikedSongs>) response.body();
+                mostLikedSongs = (ArrayList<Song>) response.body();
 
                 mostLikedSongAdapter = new MostLikedSongAdapter(getActivity(), mostLikedSongs);
 
@@ -65,7 +63,7 @@ public class Fragment_Most_Liked_Song extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<List<MostLikedSongs>> call, Throwable t) {
+            public void onFailure(@NonNull Call<List<Song>> call, @NonNull Throwable t) {
 
             }
         });

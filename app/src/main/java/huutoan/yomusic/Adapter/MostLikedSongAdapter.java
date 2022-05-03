@@ -28,10 +28,10 @@ public class MostLikedSongAdapter extends RecyclerView.Adapter<MostLikedSongAdap
 
     View view;
     Context context;
-    ArrayList<MostLikedSongs> mostLikedSongsArrayList;
-    MostLikedSongs mostLikedSongs;
+    ArrayList<Song> mostLikedSongsArrayList;
+    Song mostLikedSongs;
 
-    public MostLikedSongAdapter(Context context, ArrayList<MostLikedSongs> mostLikedSongsArrayList){
+    public MostLikedSongAdapter(Context context, ArrayList<Song> mostLikedSongsArrayList){
         this.context = context;
         this.mostLikedSongsArrayList = mostLikedSongsArrayList;
     }
@@ -71,9 +71,11 @@ public class MostLikedSongAdapter extends RecyclerView.Adapter<MostLikedSongAdap
             imageViewMostLikedSong = itemView.findViewById(R.id.imageMostLikedSong);
             textViewTitleMostLikedSong = itemView.findViewById(R.id.textViewTitleMostLiked);
             textArticle = itemView.findViewById(R.id.textViewArticle);
+
             itemView.setOnClickListener((View view) -> {
                 Intent intent = new Intent(context, PlaySongActivity.class);
-                intent.putExtra("getSongLike",  mostLikedSongsArrayList.get(getPosition()));
+                intent.putExtra("getSongLike", (Parcelable) mostLikedSongsArrayList.get(getLayoutPosition()));
+
                 context.startActivity(intent);
             });
         }

@@ -6,6 +6,7 @@ import huutoan.yomusic.Model.Charts;
 import huutoan.yomusic.Model.MostLikedSongs;
 import huutoan.yomusic.Model.PlayListSong;
 import huutoan.yomusic.Model.Singer;
+import huutoan.yomusic.Model.Song;
 import huutoan.yomusic.Model.Topic;
 import huutoan.yomusic.Model.Trending;
 import retrofit2.Call;
@@ -29,6 +30,6 @@ public interface DataService {
     Call<List<Charts>> GetDataCharts();
 
     @GET("api/getMostLikeSong")
-    Call<List<MostLikedSongs>> GetDataMostLikedSongsCurrent();
+    Call<List<Song>> GetDataMostLikedSongsCurrent();
 
 }

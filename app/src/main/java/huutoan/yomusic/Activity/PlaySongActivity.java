@@ -46,7 +46,6 @@ public class PlaySongActivity extends AppCompatActivity {
     public static ArrayList<Song> songArrayListSong = new ArrayList<>();
     public static ViewPagerPlaySong addFragmentSong;
 
-
 //    play some music
     MediaPlayer mediaPlayer;
 
@@ -68,6 +67,7 @@ public class PlaySongActivity extends AppCompatActivity {
 
         fragment_play_list_songs = new Fragment_Play_List_Songs();
         fragment_disk_song = new Fragment_Disk_Song();
+
         getDataFromIntent();
         initDataInView();
         evenClick();
@@ -314,14 +314,13 @@ public class PlaySongActivity extends AppCompatActivity {
         if (intent != null) {
             if(intent.hasExtra("getSong")) {
                 Song song = intent.getParcelableExtra("getSong");
-
                 songArrayListSong.add(song);
 
             } else if (intent.hasExtra("getSongLike")) {
-                MostLikedSongs mostLikedSongs = (MostLikedSongs) intent.getSerializableExtra("getSongLike");
+                Song mostLikedSongs = (Song) intent.getParcelableExtra("getSongLike");
+                songArrayListSong.add(mostLikedSongs);
 
             } else if (intent.hasExtra("getAllSingOfSong")){
-
                 songArrayListSong = intent.getParcelableArrayListExtra("getAllSingOfSong");
             }
         }
