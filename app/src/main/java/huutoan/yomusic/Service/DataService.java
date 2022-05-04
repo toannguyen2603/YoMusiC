@@ -23,7 +23,7 @@ public interface DataService {
     @GET("api/getAllTopic")
     Call<List<Topic>> GetDataTopic();
 
-    @GET("api/getAllAlbum")
+    @GET("api/getAllSongInAlbum")
     Call<List<Singer>> GetDataSinger();
 
     @GET("api/getAllCategory")

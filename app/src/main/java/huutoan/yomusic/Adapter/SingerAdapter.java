@@ -1,6 +1,8 @@
 package huutoan.yomusic.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +17,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
+import huutoan.yomusic.Activity.ListSongActivity;
 import huutoan.yomusic.Model.Singer;
 import huutoan.yomusic.R;
 
@@ -38,12 +41,20 @@ public class SingerAdapter extends RecyclerView.Adapter<SingerAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+
         Singer singer = singerArrayList.get(position);
         if (singer == null) {
             return;
         }
         holder.textViewSinger.setText(singer.getName());
         Picasso.get().load(singer.getThumbnail()).into(holder.imageViewSinger);
+
+        view.setOnClickListener((View view) -> {
+            Intent intent = new Intent(context, ListSongActivity.class);
+            intent.putExtra("listSongOfSinger", singerArrayList.get(position));
+            context.startActivity(intent);
+        });
+
     }
 
     @Override

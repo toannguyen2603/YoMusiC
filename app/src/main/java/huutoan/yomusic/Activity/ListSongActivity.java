@@ -7,17 +7,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -30,8 +25,8 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 import huutoan.yomusic.Adapter.ListSongAdapter;
-import huutoan.yomusic.Adapter.MostLikedSongAdapter;
 import huutoan.yomusic.Model.PlayListSong;
+import huutoan.yomusic.Model.Singer;
 import huutoan.yomusic.Model.Song;
 import huutoan.yomusic.R;
 
@@ -47,6 +42,8 @@ public class ListSongActivity extends AppCompatActivity {
     PlayListSong playListSong;
 
     ListSongAdapter listSongAdapter;
+    Singer singerArrayList;
+
     ArrayList<Song> songArrayList;
 
     @Override
@@ -61,13 +58,21 @@ public class ListSongActivity extends AppCompatActivity {
         getLayout();
 
         PutDataIntent();
-
         init();
 
-        if(playListSong != null & !playListSong.getName().equals("")) {
-            setDataInView(playListSong.getName(), playListSong.getThumbnail());
-            getDataInTopic();
+
+        if(playListSong != null) {
+            if( !playListSong.getName().equals("")) {
+                setDataInView(playListSong.getName(), playListSong.getThumbnail());
+                getDataInTopic();
+            }
+        } else if (singerArrayList != null) {
+            if( !singerArrayList.getName().equals("")) {
+                setDataInView(singerArrayList.getName(), singerArrayList.getThumbnail());
+                getDataInTopic();
+            }
         }
+
 
     }
     private void getLayout() {
@@ -81,7 +86,7 @@ public class ListSongActivity extends AppCompatActivity {
 
     }
 
-    private void init(){
+    private void init() {
 
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
@@ -89,6 +94,7 @@ public class ListSongActivity extends AppCompatActivity {
         }
         toolbar.setNavigationOnClickListener((View view) -> {
             finish();
+            songArrayList.clear();
         });
         collapsingToolbarLayout.setExpandedTitleColor(Color.WHITE);
         collapsingToolbarLayout.setCollapsedTitleTextColor(Color.WHITE);
@@ -106,9 +112,15 @@ public class ListSongActivity extends AppCompatActivity {
 
     public void getDataInTopic(){
 
-        songArrayList = (ArrayList<Song>) playListSong.getSongs();
+        if (playListSong != null) {
+            songArrayList = (ArrayList<Song>) playListSong.getSongs();
+            listSongAdapter = new ListSongAdapter(ListSongActivity.this, songArrayList);
 
-        listSongAdapter = new ListSongAdapter(ListSongActivity.this, songArrayList);
+        } else if (singerArrayList != null) {
+
+            songArrayList = (ArrayList<Song>) singerArrayList.getSongs();
+            listSongAdapter = new ListSongAdapter(ListSongActivity.this, songArrayList);
+        }
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(ListSongActivity.this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -124,11 +136,11 @@ public class ListSongActivity extends AppCompatActivity {
         Intent intent = getIntent();
 
         if (intent != null){
-
             if (intent.hasExtra("playlist")) {
                 playListSong = (PlayListSong) intent.getSerializableExtra("playlist");
 
-                Toast.makeText(this,playListSong.getName(), Toast.LENGTH_SHORT).show();
+            } else if (intent.hasExtra("listSongOfSinger")) {
+                singerArrayList = (Singer) intent.getSerializableExtra("listSongOfSinger");
             }
         }
     }

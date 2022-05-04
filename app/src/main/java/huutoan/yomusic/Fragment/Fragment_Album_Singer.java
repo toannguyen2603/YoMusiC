@@ -1,6 +1,7 @@
 package huutoan.yomusic.Fragment;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,7 +48,11 @@ public class Fragment_Album_Singer extends Fragment {
         callback.enqueue(new Callback<List<Singer>>() {
             @Override
             public void onResponse(Call<List<Singer>> call, Response<List<Singer>> response) {
+
                 ArrayList<Singer> singers = (ArrayList<Singer>) response.body();
+
+                Log.d("SingerOfSong", singers.get(0).getSongs().get(0).getNameSong());
+
                 singerAdapter = new SingerAdapter(getActivity(), singers);
 
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());

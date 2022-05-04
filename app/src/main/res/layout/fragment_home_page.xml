@@ -40,6 +40,7 @@
             android:name="huutoan.yomusic.Fragment.Fragment_Charts"
             tools:layout="@layout/fragment_charts"
             />
+
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/fragmentTopic"
             android:layout_width="match_parent"
