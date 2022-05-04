@@ -25,12 +25,11 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class Fragment_Album extends Fragment {
+public class Fragment_Album_Singer extends Fragment {
     View view;
     RecyclerView recyclerViewSinger;
-
     SingerAdapter singerAdapter;
-    ArrayList<Singer> singers;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

@@ -10,20 +10,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Popular Releases"
-            android:textSize="25sp"
-            android:textStyle="bold"
-            android:textColor="#48189C"
-            android:layout_marginLeft="10dp"/>
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/fragmentTrendingHits"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:name="huutoan.yomusic.Fragment.Fragment_Trending_Hits"
+            android:layout_marginTop="20dp"
             tools:layout ="@layout/fragment_trending_hits"
             />
         <androidx.fragment.app.FragmentContainerView
@@ -35,7 +28,7 @@
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/fragmentAlbum"
-            android:name="huutoan.yomusic.Fragment.Fragment_Album"
+            android:name="huutoan.yomusic.Fragment.Fragment_Album_Singer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:layout="@layout/fragment_album" />
