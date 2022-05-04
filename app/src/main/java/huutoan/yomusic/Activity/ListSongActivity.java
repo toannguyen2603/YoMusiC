@@ -65,7 +65,7 @@ public class ListSongActivity extends AppCompatActivity {
         init();
 
         if(playListSong != null & !playListSong.getName().equals("")) {
-            setDataInView(playListSong.getName(), playListSong.getImage());
+            setDataInView(playListSong.getName(), playListSong.getThumbnail());
             getDataInTopic();
         }
 

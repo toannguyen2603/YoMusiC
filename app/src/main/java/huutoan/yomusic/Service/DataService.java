@@ -14,7 +14,7 @@ import retrofit2.http.GET;
 
 public interface DataService {
 
-    @GET("api/getAllTrending")
+    @GET("api/getSongInTrending")
     Call<List<Trending>> GetDataTrending();
 
     @GET("api/getSongPlayList")

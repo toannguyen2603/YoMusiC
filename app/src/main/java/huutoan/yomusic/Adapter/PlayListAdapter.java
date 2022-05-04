@@ -45,14 +45,12 @@ public class PlayListAdapter extends RecyclerView.Adapter<PlayListAdapter.ViewHo
             return;
         }
         holder.textPlayList.setText(playList.getName());
-        Picasso.get().load(playList.getThumbnail()).into(holder.imagePlayList);
+        Picasso.get().load(playList.getImage()).into(holder.imagePlayList);
 
         view.setOnClickListener(view -> {
                 Intent intent = new Intent(context, ListSongActivity.class);
                 intent.putExtra("playlist", arrayListPlayList.get(position));
                 context.startActivity(intent);
-
-
         });
     }
 

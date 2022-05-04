@@ -13,6 +13,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.StrictMode;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.SeekBar;
@@ -73,7 +74,7 @@ public class PlaySongActivity extends AppCompatActivity {
         evenClick();
     }
 
-    public void evenClick(){
+    public void evenClick() {
 
         Handler handler = new Handler();
 
@@ -245,13 +246,7 @@ public class PlaySongActivity extends AppCompatActivity {
 
                 UpdateTimePlaySong();
 
-                imgPrevious.setClickable(false);
-                imgNext.setClickable(false);
-                Handler handler1 = new Handler();
-                handler1.postDelayed(() -> {
-                    imgPrevious.setClickable(true);
-                    imgNext.setClickable(true);
-                },3000);
+                makeButtonDelay();
 
             }
         });
@@ -322,9 +317,14 @@ public class PlaySongActivity extends AppCompatActivity {
 
             } else if (intent.hasExtra("getAllSingOfSong")){
                 songArrayListSong = intent.getParcelableArrayListExtra("getAllSingOfSong");
+
+            } else if (intent.hasExtra("songTrending")) {
+                Song trending = intent.getParcelableExtra("songTrending");
+                songArrayListSong.add(trending);
+
+                Log.d("getTrending", trending.getNameSong());
             }
         }
-
     }
 
    @SuppressLint("StaticFieldLeak")
@@ -450,6 +450,10 @@ public class PlaySongActivity extends AppCompatActivity {
             fragment_disk_song.ImageSong(songArrayListSong.get(position).getThumbnail());
             Objects.requireNonNull(getSupportActionBar()).setTitle(songArrayListSong.get(position).getNameSong());
         }
+        makeButtonDelay();
+    }
+
+    public void makeButtonDelay() {
 
         imgPrevious.setClickable(false);
         imgNext.setClickable(false);
@@ -459,6 +463,7 @@ public class PlaySongActivity extends AppCompatActivity {
             imgNext.setClickable(true);
         },3000);
         nextSong = false;
+
     }
 
 }

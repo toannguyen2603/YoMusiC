@@ -27,9 +27,6 @@ public class Fragment_Play_List_Songs extends Fragment {
         view = inflater.inflate(R.layout.fragment_play_list_songs,container, false);
 
         recyclerViewPlaySong = view.findViewById(R.id.recyclerViewPlaySong);
-        for(int i = 0; i < PlaySongActivity.songArrayListSong.size(); i++ ){
-            Log.d("NewAllSong", PlaySongActivity.songArrayListSong.get(i).getNameSong());
-        }
 
         if (PlaySongActivity.songArrayListSong.size() > 0) {
 

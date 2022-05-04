@@ -2,6 +2,7 @@ package huutoan.yomusic.Fragment;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,7 +53,13 @@ public class Fragment_Trending_Hits extends Fragment {
         callback.enqueue(new Callback<List<Trending>>() {
             @Override
             public void onResponse(@NonNull Call<List<Trending>> call, @NonNull Response<List<Trending>> response) {
+
                 ArrayList<Trending> trending = (ArrayList<Trending>) response.body();
+
+                for(int i = 0; i < trending.size(); i++){
+                    Log.d("trending", trending.get(i).getSongId().getNameSong());
+                }
+
                 trendingAdapter = new TrendingAdapter(getActivity(), trending);
 //
                 viewPager.setAdapter(trendingAdapter);
