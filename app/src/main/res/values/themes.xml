@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.YoMusiC" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="Theme.YoMusiC" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/black_bottom_navigation</item>
         <item name="colorPrimaryVariant">#141313</item>
@@ -21,5 +21,9 @@
     </style>
 
 
+    <style name="Theme.YoMusiC.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
 
 </resources>

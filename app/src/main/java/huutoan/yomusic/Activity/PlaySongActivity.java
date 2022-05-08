@@ -237,7 +237,6 @@ public class PlaySongActivity extends AppCompatActivity {
                         }
                         position = index;
                     }
-
                 }
 
                 new playMusic().execute(songArrayListSong.get(position).getLink());
@@ -327,7 +326,8 @@ public class PlaySongActivity extends AppCompatActivity {
         }
     }
 
-   @SuppressLint("StaticFieldLeak")
+    @SuppressWarnings("deprecation")
+    @SuppressLint("StaticFieldLeak")
    public class playMusic extends AsyncTask<String, Void, String> {
         @Override
         protected String doInBackground(String... strings) {
@@ -337,6 +337,7 @@ public class PlaySongActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String song) {
             super.onPostExecute(song);
+
             try {
                 mediaPlayer = new MediaPlayer();
 
@@ -464,6 +465,12 @@ public class PlaySongActivity extends AppCompatActivity {
         },3000);
         nextSong = false;
 
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mediaPlayer.stop();
     }
 
 }
