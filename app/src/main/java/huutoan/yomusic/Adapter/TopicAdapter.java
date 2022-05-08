@@ -1,6 +1,8 @@
 package huutoan.yomusic.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +16,8 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
+import huutoan.yomusic.Activity.AllListActivity;
+import huutoan.yomusic.Model.Charts;
 import huutoan.yomusic.Model.Topic;
 import huutoan.yomusic.R;
 
@@ -24,6 +28,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
     Context context;
     ArrayList<Topic> topicArrayList;
     Topic topic;
+    ArrayList<Charts> categoriesArrayList;
     public TopicAdapter(Context context, ArrayList<Topic> topicArrayList){
         this.context = context;
         this.topicArrayList = topicArrayList;
@@ -47,6 +52,11 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
         }
         holder.textViewTopic.setText(topic.getName());
         Picasso.get().load(topic.getImage()).into(holder.imageViewTopic);
+        view.setOnClickListener((View view) -> {
+            Intent intent = new Intent(context, AllListActivity.class);
+            intent.putExtra("AllCategory", categoriesArrayList);
+            context.startActivity(intent);
+        });
     }
 
     @Override

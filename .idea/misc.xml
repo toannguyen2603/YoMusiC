@@ -30,6 +30,7 @@
         <entry key="app/src/main/res/drawable/part_list_song.xml" value="0.1755" />
         <entry key="app/src/main/res/drawable/search.xml" value="0.2005" />
         <entry key="app/src/main/res/font/arimo_bold.xml" value="0.31562819203268644" />
+        <entry key="app/src/main/res/layout/activity_all_list.xml" value="0.2833333333333333" />
         <entry key="app/src/main/res/layout/activity_list_song.xml" value="0.2557291666666667" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.18701171875000006" />
         <entry key="app/src/main/res/layout/activity_play_song.xml" value="0.2854436083004078" />

@@ -1,9 +1,12 @@
 package huutoan.yomusic.Model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Charts {
+public class Charts implements Parcelable {
 
 @SerializedName("_id")
 @Expose
@@ -27,7 +30,33 @@ private String updatedAt;
 @Expose
 private Integer v;
 
-public String getId() {
+    protected Charts(Parcel in) {
+        id = in.readString();
+        topicId = in.readString();
+        name = in.readString();
+        thumbnail = in.readString();
+        createdAt = in.readString();
+        updatedAt = in.readString();
+        if (in.readByte() == 0) {
+            v = null;
+        } else {
+            v = in.readInt();
+        }
+    }
+
+    public static final Creator<Charts> CREATOR = new Creator<Charts>() {
+        @Override
+        public Charts createFromParcel(Parcel in) {
+            return new Charts(in);
+        }
+
+        @Override
+        public Charts[] newArray(int size) {
+            return new Charts[size];
+        }
+    };
+
+    public String getId() {
 return id;
 }
 
@@ -83,4 +112,24 @@ public void setV(Integer v) {
 this.v = v;
 }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(id);
+        parcel.writeString(topicId);
+        parcel.writeString(name);
+        parcel.writeString(thumbnail);
+        parcel.writeString(createdAt);
+        parcel.writeString(updatedAt);
+        if (v == null) {
+            parcel.writeByte((byte) 0);
+        } else {
+            parcel.writeByte((byte) 1);
+            parcel.writeInt(v);
+        }
+    }
 }

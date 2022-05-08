@@ -1,6 +1,7 @@
 package huutoan.yomusic.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
+import huutoan.yomusic.Activity.AllListActivity;
 import huutoan.yomusic.Model.Charts;
 import huutoan.yomusic.R;
 
@@ -44,6 +46,7 @@ public class ChartsAdapter extends RecyclerView.Adapter<ChartsAdapter.ViewHolder
         charts = chartsArrayList.get(position);
         holder.textViewCharts.setText(charts.getName());
         Picasso.get().load(charts.getThumbnail()).into(holder.imageViewCharts);
+
     }
 
     @Override

@@ -13,7 +13,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.StrictMode;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.SeekBar;
@@ -29,7 +28,6 @@ import java.util.Random;
 import huutoan.yomusic.Adapter.ViewPagerPlaySong;
 import huutoan.yomusic.Fragment.Fragment_Disk_Song;
 import huutoan.yomusic.Fragment.Fragment_Play_List_Songs;
-import huutoan.yomusic.Model.MostLikedSongs;
 import huutoan.yomusic.Model.Song;
 import huutoan.yomusic.R;
 
@@ -320,8 +318,6 @@ public class PlaySongActivity extends AppCompatActivity {
             } else if (intent.hasExtra("songTrending")) {
                 Song trending = intent.getParcelableExtra("songTrending");
                 songArrayListSong.add(trending);
-
-                Log.d("getTrending", trending.getNameSong());
             }
         }
     }

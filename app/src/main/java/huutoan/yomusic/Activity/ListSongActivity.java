@@ -86,9 +86,7 @@ public class ListSongActivity extends AppCompatActivity {
     private void init() {
 
         setSupportActionBar(toolbar);
-        if (getSupportActionBar() != null) {
-            Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
-        }
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationOnClickListener((View view) -> {
             finish();
             songArrayList.clear();
