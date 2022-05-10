@@ -50,6 +50,7 @@
         <entry key="app/src/main/res/layout/fragment_trending_hits.xml" value="0.2557291666666667" />
         <entry key="app/src/main/res/layout/frangment_album.xml" value="0.266304347826087" />
         <entry key="app/src/main/res/layout/part_album.xml" value="0.266304347826087" />
+        <entry key="app/src/main/res/layout/part_all_list.xml" value="0.26875" />
         <entry key="app/src/main/res/layout/part_charts.xml" value="0.266304347826087" />
         <entry key="app/src/main/res/layout/part_list_song.xml" value="0.26313405797101447" />
         <entry key="app/src/main/res/layout/part_most_liked_song.xml" value="0.28382568359375004" />

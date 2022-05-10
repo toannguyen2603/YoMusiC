@@ -1,12 +1,15 @@
 package huutoan.yomusic.Model;
 
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import java.io.Serializable;
+import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import java.util.List;
-
-public class Topic {
+public class Topic implements Serializable, Parcelable {
 
     @SerializedName("_id")
     @Expose
@@ -32,6 +35,32 @@ public class Topic {
     @SerializedName("categories")
     @Expose
     private List<Charts> categories = null;
+
+    protected Topic(Parcel in) {
+        id = in.readString();
+        name = in.readString();
+        title = in.readString();
+        image = in.readString();
+        createdAt = in.readString();
+        updatedAt = in.readString();
+        if (in.readByte() == 0) {
+            v = null;
+        } else {
+            v = in.readInt();
+        }
+    }
+
+    public static final Creator<Topic> CREATOR = new Creator<Topic>() {
+        @Override
+        public Topic createFromParcel(Parcel in) {
+            return new Topic(in);
+        }
+
+        @Override
+        public Topic[] newArray(int size) {
+            return new Topic[size];
+        }
+    };
 
     public String getId() {
         return id;
@@ -84,14 +113,37 @@ public class Topic {
     public Integer getV() {
         return v;
     }
+
     public void setV(Integer v) {
         this.v = v;
     }
+
     public List<Charts> getCategories() {
         return categories;
     }
+
     public void setCategories(List<Charts> categories) {
         this.categories = categories;
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(id);
+        parcel.writeString(name);
+        parcel.writeString(title);
+        parcel.writeString(image);
+        parcel.writeString(createdAt);
+        parcel.writeString(updatedAt);
+        if (v == null) {
+            parcel.writeByte((byte) 0);
+        } else {
+            parcel.writeByte((byte) 1);
+            parcel.writeInt(v);
+        }
+    }
 }

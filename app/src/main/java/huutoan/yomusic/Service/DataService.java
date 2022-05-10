@@ -20,7 +20,7 @@ public interface DataService {
     @GET("api/getSongPlayList")
     Call<List<PlayListSong>> GetDataSongPlayList();
 
-    @GET("api/getAllTopic")
+    @GET("api/getCategoryForTopic")
     Call<List<Topic>> GetDataTopic();
 
     @GET("api/getAllSongInAlbum")
@@ -31,5 +31,6 @@ public interface DataService {
 
     @GET("api/getMostLikeSong")
     Call<List<Song>> GetDataMostLikedSongsCurrent();
+
 
 }
