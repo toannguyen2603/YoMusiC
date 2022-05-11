@@ -1,10 +1,12 @@
 package huutoan.yomusic.Model;
 
 
+import java.io.Serializable;
+import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Charts {
+public class Charts implements Serializable {
 
     @SerializedName("_id")
     @Expose
@@ -15,9 +17,6 @@ public class Charts {
     @SerializedName("name")
     @Expose
     private String name;
-    @SerializedName("title")
-    @Expose
-    private String title;
     @SerializedName("thumbnail")
     @Expose
     private String thumbnail;
@@ -30,6 +29,12 @@ public class Charts {
     @SerializedName("__v")
     @Expose
     private Integer v;
+    @SerializedName("title")
+    @Expose
+    private String title;
+    @SerializedName("songs")
+    @Expose
+    private List<Song> songs = null;
 
     public String getId() {
         return id;
@@ -53,14 +58,6 @@ public class Charts {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
     }
 
     public String getThumbnail() {
@@ -93,6 +90,22 @@ public class Charts {
 
     public void setV(Integer v) {
         this.v = v;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public List<Song> getSongs() {
+        return songs;
+    }
+
+    public void setSongs(List<Song> songs) {
+        this.songs = songs;
     }
 
 }

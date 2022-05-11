@@ -13,10 +13,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import huutoan.yomusic.Activity.AllListActivity;
+import huutoan.yomusic.Activity.ListSongActivity;
+import huutoan.yomusic.Activity.PlaySongActivity;
 import huutoan.yomusic.Model.Charts;
+import huutoan.yomusic.Model.Singer;
+import huutoan.yomusic.Model.Song;
 import huutoan.yomusic.R;
 
 public class ChartsAdapter extends RecyclerView.Adapter<ChartsAdapter.ViewHolder> {
@@ -44,9 +49,17 @@ public class ChartsAdapter extends RecyclerView.Adapter<ChartsAdapter.ViewHolder
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         charts = chartsArrayList.get(position);
+        if (charts == null) {
+            return;
+        }
         holder.textViewCharts.setText(charts.getName());
         Picasso.get().load(charts.getThumbnail()).into(holder.imageViewCharts);
 
+        view.setOnClickListener((View view) -> {
+            Intent intent = new Intent(context, ListSongActivity.class);
+            intent.putExtra("listSongOfCategories", chartsArrayList.get(position));
+            context.startActivity(intent);
+        });
     }
 
     @Override

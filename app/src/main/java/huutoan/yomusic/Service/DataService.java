@@ -26,7 +26,7 @@ public interface DataService {
     @GET("api/getAllSongInAlbum")
     Call<List<Singer>> GetDataSinger();
 
-    @GET("api/getAllCategory")
+    @GET("api/getSongCategory")
     Call<List<Charts>> GetDataCharts();
 
     @GET("api/getMostLikeSong")

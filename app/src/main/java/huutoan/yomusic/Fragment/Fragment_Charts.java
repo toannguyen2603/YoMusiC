@@ -29,7 +29,6 @@ public class Fragment_Charts extends Fragment {
 
     View view;
     RecyclerView recyclerViewCharts;
-    ArrayList<Charts> charts;
     ChartsAdapter chartsAdapter;
 
     @Nullable
@@ -49,7 +48,7 @@ public class Fragment_Charts extends Fragment {
             @Override
             public void onResponse(Call<List<Charts>> call, Response<List<Charts>> response) {
 
-                charts = (ArrayList<Charts>) response.body();
+                ArrayList<Charts> charts = (ArrayList<Charts>) response.body();
                 chartsAdapter = new ChartsAdapter(getActivity(), charts);
 
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());

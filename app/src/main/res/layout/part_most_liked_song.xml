@@ -70,6 +70,20 @@
                 android:contentDescription="@string/app_name"
                 android:src="@drawable/icon_heart"
                 tools:ignore="ImageContrastCheck,TouchTargetSizeCheck" />
+
+            <TextView
+                android:id="@+id/textLike"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/btn_like"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="10sp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="Text view"
+                android:textColor="@color/grey"
+                android:textSize="10sp" />
         </RelativeLayout>
 
     </androidx.cardview.widget.CardView>

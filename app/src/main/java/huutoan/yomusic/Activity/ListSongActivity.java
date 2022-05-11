@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 import huutoan.yomusic.Adapter.ListSongAdapter;
+import huutoan.yomusic.Model.Charts;
 import huutoan.yomusic.Model.PlayListSong;
 import huutoan.yomusic.Model.Singer;
 import huutoan.yomusic.Model.Song;
@@ -40,7 +41,7 @@ public class ListSongActivity extends AppCompatActivity {
 
     ListSongAdapter listSongAdapter;
     Singer singerArrayList;
-
+    Charts chartsArrayList;
     ArrayList<Song> songArrayList;
 
     @Override
@@ -66,6 +67,11 @@ public class ListSongActivity extends AppCompatActivity {
         } else if (singerArrayList != null) {
             if( !singerArrayList.getName().equals("")) {
                 setDataInView(singerArrayList.getName(), singerArrayList.getThumbnail());
+                getDataInTopic();
+            }
+        } else if (chartsArrayList != null) {
+            if( !chartsArrayList.getName().equals("")) {
+                setDataInView(chartsArrayList.getName(), chartsArrayList.getThumbnail());
                 getDataInTopic();
             }
         }
@@ -112,8 +118,11 @@ public class ListSongActivity extends AppCompatActivity {
             listSongAdapter = new ListSongAdapter(ListSongActivity.this, songArrayList);
 
         } else if (singerArrayList != null) {
-
             songArrayList = (ArrayList<Song>) singerArrayList.getSongs();
+            listSongAdapter = new ListSongAdapter(ListSongActivity.this, songArrayList);
+
+        } else if (chartsArrayList != null) {
+            songArrayList = (ArrayList<Song>) chartsArrayList.getSongs();
             listSongAdapter = new ListSongAdapter(ListSongActivity.this, songArrayList);
         }
 
@@ -136,6 +145,9 @@ public class ListSongActivity extends AppCompatActivity {
 
             } else if (intent.hasExtra("listSongOfSinger")) {
                 singerArrayList = (Singer) intent.getSerializableExtra("listSongOfSinger");
+
+            } else if (intent.hasExtra("listSongOfCategories")) {
+                chartsArrayList = (Charts) intent.getSerializableExtra("listSongOfCategories");
             }
         }
     }

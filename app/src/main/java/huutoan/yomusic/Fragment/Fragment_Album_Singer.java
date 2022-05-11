@@ -51,8 +51,6 @@ public class Fragment_Album_Singer extends Fragment {
 
                 ArrayList<Singer> singers = (ArrayList<Singer>) response.body();
 
-                Log.d("SingerOfSong", singers.get(0).getSongs().get(0).getNameSong());
-
                 singerAdapter = new SingerAdapter(getActivity(), singers);
 
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());

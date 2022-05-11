@@ -54,6 +54,7 @@ public class MostLikedSongAdapter extends RecyclerView.Adapter<MostLikedSongAdap
         holder.textArticle.setText(mostLikedSongs.getArtists());
         holder.textViewTitleMostLikedSong.setText(mostLikedSongs.getNameSong());
         Picasso.get().load(mostLikedSongs.getThumbnail()).into(holder.imageViewMostLikedSong);
+        holder.textLike.setText(mostLikedSongs.getLike() + " likes");
 
     }
 
@@ -64,13 +65,14 @@ public class MostLikedSongAdapter extends RecyclerView.Adapter<MostLikedSongAdap
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView imageViewMostLikedSong;
-        TextView textViewTitleMostLikedSong, textArticle;
+        TextView textViewTitleMostLikedSong, textArticle, textLike;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             imageViewMostLikedSong = itemView.findViewById(R.id.imageMostLikedSong);
             textViewTitleMostLikedSong = itemView.findViewById(R.id.textViewTitleMostLiked);
             textArticle = itemView.findViewById(R.id.textViewArticle);
+            textLike = itemView.findViewById(R.id.textLike);
 
             itemView.setOnClickListener((View view) -> {
                 Intent intent = new Intent(context, PlaySongActivity.class);
