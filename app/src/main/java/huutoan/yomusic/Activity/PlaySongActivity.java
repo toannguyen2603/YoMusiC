@@ -113,14 +113,11 @@ public class PlaySongActivity extends AppCompatActivity {
             if (mediaPlayer.isPlaying()) {
                 mediaPlayer.pause();
                 imgPlay.setImageResource(R.drawable.play_button);
-
-                fragment_disk_song.objectAnimator.cancel();
-
+                fragment_disk_song.circleImageViewPlaySong.animate().cancel();
             } else  {
                 mediaPlayer.start();
                 imgPlay.setImageResource(R.drawable.pause);
-
-                fragment_disk_song.objectAnimator.start();
+                fragment_disk_song.startAnimation();
             }
         });
 
@@ -186,7 +183,7 @@ public class PlaySongActivity extends AppCompatActivity {
 
         imgNext.setOnClickListener((View view) -> {
 
-            fragment_disk_song.objectAnimator.start();
+            fragment_disk_song.startAnimation();
 
             if (songArrayListSong.size() > 0 ) {
 
@@ -206,7 +203,7 @@ public class PlaySongActivity extends AppCompatActivity {
 
         imgPrevious.setOnClickListener((View view) -> {
 
-            fragment_disk_song.objectAnimator.start();
+            fragment_disk_song.startAnimation();
 
             if (songArrayListSong.size() > 0 ) {
 
@@ -407,7 +404,7 @@ public class PlaySongActivity extends AppCompatActivity {
             public void run() {
                 if(nextSong == true) {
 
-                    fragment_disk_song.objectAnimator.start();
+//                    fragment_disk_song.objectAnimator.start();
 
                     checkNextTime();
 
