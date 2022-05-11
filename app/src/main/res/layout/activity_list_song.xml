@@ -37,23 +37,14 @@
                 android:layout_height="?attr/actionBarSize"
                 />
 
-            <androidx.cardview.widget.CardView
-                android:layout_width="225sp"
-                android:layout_height="225sp"
-                android:layout_gravity="center"
-                app:cardCornerRadius="18dp"
-                >
-
                 <ImageView
                     android:id="@+id/imageViewListSong"
                     android:src="@drawable/mada"
                     android:scaleType="fitXY"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_width="225sp"
+                    android:layout_height="225sp"
                     android:contentDescription="@string/image_song" />
-
-            </androidx.cardview.widget.CardView>
-
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 

@@ -13,6 +13,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.like.LikeButton;
+import com.like.OnAnimationEndListener;
+import com.like.OnLikeListener;
 import com.squareup.picasso.Picasso;
 
 import java.io.Serializable;
@@ -24,7 +27,7 @@ import huutoan.yomusic.Model.MostLikedSongs;
 import huutoan.yomusic.Model.Song;
 import huutoan.yomusic.R;
 
-public class MostLikedSongAdapter extends RecyclerView.Adapter<MostLikedSongAdapter.ViewHolder> {
+public class MostLikedSongAdapter extends RecyclerView.Adapter<MostLikedSongAdapter.ViewHolder> implements OnLikeListener,OnAnimationEndListener  {
 
     View view;
     Context context;
@@ -51,11 +54,14 @@ public class MostLikedSongAdapter extends RecyclerView.Adapter<MostLikedSongAdap
         if ( mostLikedSongs == null) {
             return;
         }
+
+        holder.likeButton.setOnLikeListener(this);
+        holder.likeButton.setOnAnimationEndListener(this);
+
         holder.textArticle.setText(mostLikedSongs.getArtists());
         holder.textViewTitleMostLikedSong.setText(mostLikedSongs.getNameSong());
         Picasso.get().load(mostLikedSongs.getThumbnail()).into(holder.imageViewMostLikedSong);
         holder.textLike.setText(mostLikedSongs.getLike() + " likes");
-
     }
 
     @Override
@@ -63,7 +69,13 @@ public class MostLikedSongAdapter extends RecyclerView.Adapter<MostLikedSongAdap
         return mostLikedSongsArrayList != null ? mostLikedSongsArrayList.size() : 0;
     }
 
+    @Override
+    public void onAnimationEnd(LikeButton likeButton) {
+
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder {
+        LikeButton likeButton;
         ImageView imageViewMostLikedSong;
         TextView textViewTitleMostLikedSong, textArticle, textLike;
         public ViewHolder(@NonNull View itemView) {
@@ -73,6 +85,7 @@ public class MostLikedSongAdapter extends RecyclerView.Adapter<MostLikedSongAdap
             textViewTitleMostLikedSong = itemView.findViewById(R.id.textViewTitleMostLiked);
             textArticle = itemView.findViewById(R.id.textViewArticle);
             textLike = itemView.findViewById(R.id.textLike);
+            likeButton = itemView.findViewById(R.id.btn_like);
 
             itemView.setOnClickListener((View view) -> {
                 Intent intent = new Intent(context, PlaySongActivity.class);
@@ -82,4 +95,15 @@ public class MostLikedSongAdapter extends RecyclerView.Adapter<MostLikedSongAdap
             });
         }
     }
+
+    @Override
+    public void liked(LikeButton likeButton) {
+
+    }
+
+    @Override
+    public void unLiked(LikeButton likeButton) {
+
+    }
+
 }

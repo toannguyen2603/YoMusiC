@@ -13,5 +13,7 @@
     <color name="black_main">#1B1B1B</color>
     <color name="bar_trans">#1B1B1B</color>
     <color name="toolbar_color" tools:ignore="ReferenceType">@drawable/custom_background_main</color>
-
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
 </resources>

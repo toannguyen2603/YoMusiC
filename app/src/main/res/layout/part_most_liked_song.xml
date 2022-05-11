@@ -60,15 +60,16 @@
                 android:maxLines="2"
                 android:text="text view text view text view text view text view text view" />
 
-            <ImageView
+            <com.like.LikeButton
                 android:id="@+id/btn_like"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
                 android:layout_marginEnd="7sp"
                 android:contentDescription="@string/app_name"
-                android:src="@drawable/icon_heart"
+                app:icon_size="6dp"
+                app:icon_type="heart"
                 tools:ignore="ImageContrastCheck,TouchTargetSizeCheck" />
 
             <TextView
@@ -77,8 +78,8 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/btn_like"
                 android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:layout_marginEnd="10sp"
+                android:layout_marginEnd="14sp"
+                android:layout_marginTop="-10sp"
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:text="Text view"
