@@ -1,9 +1,15 @@
 package huutoan.yomusic.Fragment;
 
+import android.app.Dialog;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -11,13 +17,10 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.like.LikeButton;
-import com.like.OnAnimationEndListener;
-import com.like.OnLikeListener;
-
 import java.util.ArrayList;
 import java.util.List;
 
+import huutoan.yomusic.Activity.MainActivity;
 import huutoan.yomusic.Adapter.MostLikedSongAdapter;
 import huutoan.yomusic.Model.Song;
 import huutoan.yomusic.R;
@@ -27,10 +30,11 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+
 public class Fragment_Most_Liked_Song extends Fragment{
 
     View view;
-    RecyclerView recyclerViewLikeSong;
+    public static RecyclerView recyclerViewLikeSong;
     MostLikedSongAdapter mostLikedSongAdapter;
     ArrayList<Song> mostLikedSongs;
 
@@ -42,14 +46,29 @@ public class Fragment_Most_Liked_Song extends Fragment{
         view = inflater.inflate(R.layout.fragment_most_liked_song, container, false);
 
         recyclerViewLikeSong = view.findViewById(R.id.recyclerViewMostLikedSong);
-
-        GetData();
+        GetDataMostLikeSong();
 
         return view;
     }
 
-    public void GetData(){
+    public void GetDataMostLikeSong(){
         DataService dataService = APIService.getService();
+
+        final Dialog dialog1  = new Dialog(getActivity());
+        dialog1.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog1.setContentView(R.layout.part_dialog);
+        Window window = dialog1.getWindow();
+        if (window == null) {
+            return;
+        }
+        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        WindowManager.LayoutParams windowAttributes = window.getAttributes();
+        windowAttributes.gravity = Gravity.CENTER;
+        window.setAttributes(windowAttributes);
+        dialog1.setCancelable(false);
+        dialog1.show();
+
         Call<List<Song>> callback = dataService.GetDataMostLikedSongsCurrent();
 
         callback.enqueue(new Callback<List<Song>>() {
@@ -57,6 +76,8 @@ public class Fragment_Most_Liked_Song extends Fragment{
             public void onResponse(@NonNull Call<List<Song>> call, @NonNull Response<List<Song>> response) {
 
                 mostLikedSongs = (ArrayList<Song>) response.body();
+
+                dialog1.dismiss();
 
                 mostLikedSongAdapter = new MostLikedSongAdapter(getActivity(), mostLikedSongs);
 
@@ -75,6 +96,5 @@ public class Fragment_Most_Liked_Song extends Fragment{
             }
         });
     }
-
 
 }

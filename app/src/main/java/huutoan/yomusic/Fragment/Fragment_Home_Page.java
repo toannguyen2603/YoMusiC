@@ -1,6 +1,8 @@
 package huutoan.yomusic.Fragment;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +14,7 @@ import huutoan.yomusic.R;
 public class Fragment_Home_Page extends Fragment {
     View view;
 
+    ProgressDialog dialog;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

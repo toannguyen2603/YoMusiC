@@ -32,8 +32,8 @@
 
   <androidx.viewpager2.widget.ViewPager2
       android:id="@+id/viewPagerDiskSong"
-      android:layout_width="300dp"
-      android:layout_height="300dp"
+      android:layout_width="289dp"
+      android:layout_height="289dp"
       android:layout_below="@+id/toolBarPlaySong"
       android:layout_centerHorizontal="true"
       android:layout_marginTop="56dp"
@@ -153,14 +153,13 @@
 
     <ImageButton
         android:id="@+id/imageButtonPlayOfPause"
-        android:layout_width="67dp"
-        android:layout_height="67dp"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
         android:layout_centerInParent="true"
         android:background="@null"
         android:contentDescription="@string/playOrPause"
         android:scaleType="fitXY"
-        app:srcCompat="@drawable/play_button"
-         />
+        app:srcCompat="@drawable/play_button" />
 
     <ImageButton
         android:id="@+id/imageButtonNextSong"

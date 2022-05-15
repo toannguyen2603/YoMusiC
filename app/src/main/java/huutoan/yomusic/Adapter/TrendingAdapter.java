@@ -40,7 +40,7 @@ public class TrendingAdapter extends PagerAdapter {
 
     @Override
     public int getCount() {
-        return trendingArrayList.size();
+        return trendingArrayList != null ? trendingArrayList.size() : 0;
     }
 
     @Override

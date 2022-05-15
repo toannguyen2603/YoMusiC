@@ -10,7 +10,11 @@ import huutoan.yomusic.Model.Song;
 import huutoan.yomusic.Model.Topic;
 import huutoan.yomusic.Model.Trending;
 import retrofit2.Call;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
+import retrofit2.http.Query;
 
 public interface DataService {
 
@@ -32,5 +36,8 @@ public interface DataService {
     @GET("api/getMostLikeSong")
     Call<List<Song>> GetDataMostLikedSongsCurrent();
 
+    @FormUrlEncoded
+    @POST("api/searchByKeywords")
+    Call<List<Song>> GetDataSearch(@Field("name_song") String name_song);
 
 }

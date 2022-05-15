@@ -1,7 +1,6 @@
 package huutoan.yomusic.Fragment;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,10 +11,10 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
+import huutoan.yomusic.Activity.MainActivity;
 import huutoan.yomusic.Adapter.SingerAdapter;
 import huutoan.yomusic.Model.Singer;
 import huutoan.yomusic.R;
@@ -28,21 +27,20 @@ import retrofit2.Response;
 
 public class Fragment_Album_Singer extends Fragment {
     View view;
-    RecyclerView recyclerViewSinger;
     SingerAdapter singerAdapter;
+    RecyclerView recyclerViewSinger;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_album, container, false);
-
         recyclerViewSinger = view.findViewById(R.id.recyclerViewSinger);
-
-        GetData();
+        GetDataSinger();
         return  view;
     }
 
-    public void GetData(){
+
+    public void GetDataSinger(){
         DataService dataservice = APIService.getService();
         Call<List<Singer>> callback = dataservice.GetDataSinger();
         callback.enqueue(new Callback<List<Singer>>() {
@@ -67,4 +65,6 @@ public class Fragment_Album_Singer extends Fragment {
             }
         });
     }
+
+
 }
