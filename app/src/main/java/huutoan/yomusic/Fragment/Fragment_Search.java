@@ -84,7 +84,7 @@ public class Fragment_Search extends Fragment {
         );
 
         Call<List<Song>> callback = dataService.GetDataSearch(query);
-        Log.d("QueryACC", String.valueOf(callback));
+
         callback.enqueue(new Callback<List<Song>>() {
             @Override
             public void onResponse(Call<List<Song>> call, Response<List<Song>> response) {

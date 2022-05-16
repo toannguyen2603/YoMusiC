@@ -2,7 +2,7 @@
     <string name="app_name">YoMusiC</string>
     <string name="home_page">Home</string>
     <string name="search_page">Search</string>
-    <string name="library_page">Your library</string>
+    <string name="library_page">Album</string>
     <string name="account">Account</string>
     <string name="image_song">Image Song</string>
     <string name="previous">Back</string>

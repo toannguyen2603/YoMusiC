@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -26,6 +27,11 @@ import huutoan.yomusic.Activity.PlaySongActivity;
 import huutoan.yomusic.Model.MostLikedSongs;
 import huutoan.yomusic.Model.Song;
 import huutoan.yomusic.R;
+import huutoan.yomusic.Service.APIService;
+import huutoan.yomusic.Service.DataService;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MostLikedSongAdapter extends RecyclerView.Adapter<MostLikedSongAdapter.ViewHolder> implements OnLikeListener,OnAnimationEndListener  {
 
@@ -61,7 +67,6 @@ public class MostLikedSongAdapter extends RecyclerView.Adapter<MostLikedSongAdap
         holder.textArticle.setText(mostLikedSongs.getArtists());
         holder.textViewTitleMostLikedSong.setText(mostLikedSongs.getNameSong());
         Picasso.get().load(mostLikedSongs.getThumbnail()).into(holder.imageViewMostLikedSong);
-        holder.textLike.setText(mostLikedSongs.getLike() + " likes");
     }
 
     @Override
@@ -81,10 +86,10 @@ public class MostLikedSongAdapter extends RecyclerView.Adapter<MostLikedSongAdap
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
+
             imageViewMostLikedSong = itemView.findViewById(R.id.imageMostLikedSong);
             textViewTitleMostLikedSong = itemView.findViewById(R.id.textViewTitleMostLiked);
             textArticle = itemView.findViewById(R.id.textViewArticle);
-            textLike = itemView.findViewById(R.id.textLike);
             likeButton = itemView.findViewById(R.id.btn_like);
 
             itemView.setOnClickListener((View view) -> {
@@ -98,11 +103,47 @@ public class MostLikedSongAdapter extends RecyclerView.Adapter<MostLikedSongAdap
 
     @Override
     public void liked(LikeButton likeButton) {
+        DataService dataService = APIService.getService();
+        Call<String> callback = dataService.UpdateLikeForSong(mostLikedSongsArrayList.get(likeButton.getVerticalScrollbarPosition()).getId(), "1");
+        callback.enqueue(new Callback<String>() {
+           @Override
+           public void onResponse(Call<String> call, Response<String> response) {
+               String result = response.body();
+               if (result.equals("Update like success")) {
+                   Toast.makeText(context, "You liked", Toast.LENGTH_SHORT).show();
+               } else {
+                   Toast.makeText(context, "Error!", Toast.LENGTH_SHORT).show();
+
+               }
+           }
+           @Override
+           public void onFailure(Call<String> call, Throwable t) {
+
+           }
+       });
 
     }
 
     @Override
     public void unLiked(LikeButton likeButton) {
+        DataService dataService = APIService.getService();
+        Call<String> callback = dataService.UpdateLikeForSong(mostLikedSongsArrayList.get(likeButton.getVerticalScrollbarPosition()).getId(), "-1");
+        callback.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                String result = response.body();
+                if (result.equals("Update like success")) {
+                    Toast.makeText(context, "You unliked", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(context, "Error!", Toast.LENGTH_SHORT).show();
+
+                }
+            }
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+
+            }
+        });
 
     }
 
