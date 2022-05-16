@@ -43,8 +43,6 @@ public class AllListActivity extends AppCompatActivity {
         initData();
         getDataIntent();
 
-        Log.d("ChartTra", String.valueOf(topic));
-
         allListAdapter = new AllListAdapter(AllListActivity.this, chartsArrayList);
         recyclerViewAllList.setLayoutManager(new GridLayoutManager(AllListActivity.this,2));
         recyclerViewAllList.setAdapter(allListAdapter);

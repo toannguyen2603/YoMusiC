@@ -2,6 +2,7 @@ package huutoan.yomusic.Fragment;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -59,27 +60,29 @@ public class Fragment_Trending_Hits extends Fragment {
 
                 ArrayList<Trending> trending = (ArrayList<Trending>) response.body();
 
+                Log.d("ABCD", String.valueOf(trending.size()));
+
                 trendingAdapter = new TrendingAdapter(getActivity(), trending);
 
                 viewPager.setAdapter(trendingAdapter);
                 circleIndicator.setViewPager(Fragment_Trending_Hits.viewPager);
 //                manager
 
+
                 if(trending.size() > 0) {
 
                     handler = new Handler();
+
                     runnable = () -> {
                         currentItem = viewPager.getCurrentItem();
                         currentItem++;
-                        if(trending.size() <= 0) {
-                            currentItem = 0;
-                        }
-                        if(currentItem >= viewPager.getAdapter().getCount()){
+                        if(currentItem >= trending.size()) {
                             currentItem = 0;
                         } else {
-                            viewPager.getAdapter().getCount();
+                            trending.size();
                         }
                         viewPager.setCurrentItem(currentItem, true);
+
                         handler.postDelayed(runnable, 3000);
                     };
 

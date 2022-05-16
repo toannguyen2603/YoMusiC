@@ -55,7 +55,7 @@
         android:maxWidth="310dp"
         android:text="-----"
         android:textColor="#FFFFFF"
-        android:textSize="24sp" />
+        android:textSize="16sp" />
 
     <TextView
         android:id="@+id/textViewNameArticle"
@@ -66,7 +66,7 @@
         android:maxWidth="350dp"
         android:text="---"
         android:textColor="#E4E4E4"
-        android:textSize="20sp" />
+        android:textSize="16sp" />
 
     <ImageView
         android:id="@+id/imageviewHeart"

@@ -57,19 +57,10 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     BottomNavigationView bottomNavigation;
-
-
-    TopicAdapter topicAdapter;
-    ArrayList<Topic> topics;
-
-    ChartsAdapter chartsAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        getDataTopic();
-        GetDataCharts();
-
 
 //        check network
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -110,58 +101,5 @@ public class MainActivity extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction().replace(R.id.mainViewPager2, selectedFragment).commit();
         return true;
     });
-
-
-    public void getDataTopic(){
-        DataService dataService = APIService.getService();
-        Call<List<Topic>> callback = dataService.GetDataTopic();
-
-        callback.enqueue(new Callback<List<Topic>>() {
-            @Override
-            public void onResponse(Call<List<Topic>> call, Response<List<Topic>> response) {
-                topics = (ArrayList<Topic>) response.body();
-
-                topicAdapter = new TopicAdapter(MainActivity.this ,topics);
-
-                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(MainActivity.this);
-                linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-                Fragment_Topic.recyclerViewTopic.setLayoutManager(linearLayoutManager);
-                Fragment_Topic.recyclerViewTopic.setAdapter(topicAdapter);
-            }
-
-            @Override
-            public void onFailure(Call<List<Topic>> call, Throwable t) {
-
-            }
-        });
-    }
-
-    public void GetDataCharts(){
-        DataService dataService = APIService.getService();
-        Call<List<Charts>> callback = dataService.GetDataCharts();
-
-        callback.enqueue(new Callback<List<Charts>>() {
-            @Override
-            public void onResponse(Call<List<Charts>> call, Response<List<Charts>> response) {
-
-                ArrayList<Charts> charts = (ArrayList<Charts>) response.body();
-                chartsAdapter = new ChartsAdapter(MainActivity.this, charts);
-
-                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(MainActivity.this);
-                linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-                Fragment_Charts.recyclerViewCharts.setLayoutManager(linearLayoutManager);
-
-//                set adapter for recycle view
-                Fragment_Charts.recyclerViewCharts.setAdapter(chartsAdapter);
-            }
-
-            @Override
-            public void onFailure(Call<List<Charts>> call, Throwable t) {
-
-            }
-        });
-    }
-
-
 
 }

@@ -34,7 +34,7 @@ import huutoan.yomusic.R;
 public class PlaySongActivity extends AppCompatActivity {
 
     Toolbar toolbarPlaySong;
-    TextView textTimeSong, textTimeTotalSong;
+    TextView textTimeSong, textTimeTotalSong , textViewNameSong, textViewNameArticle ;
     SeekBar seekBarTimeSong;
     ImageButton imgPlay, imgShuffle, imgNext, imgPrevious, imgRepeat;
     ViewPager2 viewPagerPlaySong;
@@ -116,6 +116,8 @@ public class PlaySongActivity extends AppCompatActivity {
         imgShuffle = findViewById(R.id.imageButtonShuffle);
         imgRepeat = findViewById(R.id.imageButtonLoop);
         viewPagerPlaySong = findViewById(R.id.viewPagerDiskSong);
+        textViewNameSong = findViewById(R.id.textViewNameSong);
+        textViewNameArticle = findViewById(R.id.textViewNameArticle);
 
     }
 
@@ -143,7 +145,10 @@ public class PlaySongActivity extends AppCompatActivity {
 
 //        play first song
         if(songArrayListSong.size() > 0) {
+
             Objects.requireNonNull(getSupportActionBar()).setTitle(songArrayListSong.get(0).getNameSong());
+            textViewNameSong.setText(songArrayListSong.get(0).getTitle());
+            textViewNameArticle.setText(songArrayListSong.get(0).getArtists());
             new playMusic().execute(songArrayListSong.get(0).getLink());
             imgPlay.setImageResource(R.drawable.pause);
 
