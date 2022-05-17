@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 
 import androidx.annotation.NonNull;
@@ -28,6 +29,7 @@ import retrofit2.Response;
 public class Fragment_Topic extends Fragment {
     View view;
     public static RecyclerView recyclerViewTopic;
+    TextView textTitleTopic;
 
     TopicAdapter topicAdapter;
     ArrayList<Topic> topics;
@@ -38,6 +40,7 @@ public class Fragment_Topic extends Fragment {
         view = inflater.inflate(R.layout.fragment_topic, container,false);
 
         recyclerViewTopic = view.findViewById(R.id.recyclerViewTopic);
+        textTitleTopic = view.findViewById(R.id.textTitleTopic);
         getDataTopic();
         return  view;
     }
@@ -58,6 +61,7 @@ public class Fragment_Topic extends Fragment {
                 linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
                 recyclerViewTopic.setLayoutManager(linearLayoutManager);
                 recyclerViewTopic.setAdapter(topicAdapter);
+                textTitleTopic.setText("Fresh New Music");
             }
 
             @Override

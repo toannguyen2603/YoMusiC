@@ -3,7 +3,7 @@
     <style name="Theme.YoMusiC" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/customer_color_navigation</item>
-        <item name="colorPrimaryVariant">#141313</item>
+        <item name="colorPrimaryVariant">#0E0E0E</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
@@ -11,21 +11,13 @@
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
-        <!-- Customize your theme here. -->
-        <item name="android:windowFullscreen">true</item>
-        <item name="android:windowContentOverlay">@null</item>
+
     </style>
 
     <style name="ExpandedAppBar" parent="@android:style/TextAppearance.Medium">
         <item name="android:textSize">25sp</item>
         <item name="android:textColor">#fff</item>
         <item name="android:textStyle">bold</item>
-    </style>
-
-
-    <style name="Theme.YoMusiC.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
     </style>
 
 </resources>

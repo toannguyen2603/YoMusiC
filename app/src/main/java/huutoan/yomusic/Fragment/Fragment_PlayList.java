@@ -72,6 +72,8 @@ public class Fragment_PlayList extends Fragment {
                 recyclerViewPlayList.setLayoutManager(linearLayoutManager);
 
                 recyclerViewPlayList.setAdapter(playListAdapter);
+
+                textTitlePlayList.setText("Recommended");
             }
 
             @Override

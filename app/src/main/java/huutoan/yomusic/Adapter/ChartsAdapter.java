@@ -13,15 +13,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
-import huutoan.yomusic.Activity.AllListActivity;
 import huutoan.yomusic.Activity.ListSongActivity;
-import huutoan.yomusic.Activity.PlaySongActivity;
 import huutoan.yomusic.Model.Charts;
-import huutoan.yomusic.Model.Singer;
-import huutoan.yomusic.Model.Song;
 import huutoan.yomusic.R;
 
 public class ChartsAdapter extends RecyclerView.Adapter<ChartsAdapter.ViewHolder> {

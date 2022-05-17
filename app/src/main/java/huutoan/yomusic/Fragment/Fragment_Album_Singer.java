@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -29,12 +30,14 @@ public class Fragment_Album_Singer extends Fragment {
     View view;
     SingerAdapter singerAdapter;
     RecyclerView recyclerViewSinger;
+    TextView textTitleSinger;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_album, container, false);
         recyclerViewSinger = view.findViewById(R.id.recyclerViewSinger);
+        textTitleSinger = view.findViewById(R.id.textTitleAlbum);
         GetDataSinger();
         return  view;
     }
@@ -57,6 +60,8 @@ public class Fragment_Album_Singer extends Fragment {
 
 //                set adapter for recycle view
                 recyclerViewSinger.setAdapter(singerAdapter);
+
+                textTitleSinger.setText("Popular Albums");
             }
 
             @Override

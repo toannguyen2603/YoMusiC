@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -35,6 +36,7 @@ public class Fragment_Most_Liked_Song extends Fragment{
 
     View view;
     public static RecyclerView recyclerViewLikeSong;
+    TextView titleMostLikeSong;
     MostLikedSongAdapter mostLikedSongAdapter;
     ArrayList<Song> mostLikedSongs;
 
@@ -46,6 +48,7 @@ public class Fragment_Most_Liked_Song extends Fragment{
         view = inflater.inflate(R.layout.fragment_most_liked_song, container, false);
 
         recyclerViewLikeSong = view.findViewById(R.id.recyclerViewMostLikedSong);
+        titleMostLikeSong = view.findViewById(R.id.textTitleMostLikedSong);
         GetDataMostLikeSong();
 
         return view;
@@ -88,6 +91,7 @@ public class Fragment_Most_Liked_Song extends Fragment{
 //                set adapter for recycle view
                 recyclerViewLikeSong.setAdapter(mostLikedSongAdapter);
 
+                titleMostLikeSong.setText("Most Like Song");
             }
 
             @Override

@@ -15,7 +15,7 @@
         android:layout_gravity="center_vertical"
         app:cardCornerRadius="10sp">
         <RelativeLayout
-            android:background="@color/purple_700"
+            android:background="@color/teal_700"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 

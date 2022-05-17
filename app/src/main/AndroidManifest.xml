@@ -13,9 +13,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.YoMusiC">
         <activity
-            android:name=".Activity.AllListActivity"
-            android:exported="true" />
-        <activity
             android:name=".Activity.PlaySongActivity"
             android:exported="true" />
         <activity

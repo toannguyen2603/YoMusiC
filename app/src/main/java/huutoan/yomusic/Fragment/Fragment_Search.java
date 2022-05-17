@@ -1,5 +1,8 @@
 package huutoan.yomusic.Fragment;
 
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
+
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.util.Log;
@@ -19,6 +22,10 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.airbnb.lottie.LottieAnimationView;
+import com.google.android.material.shape.CornerFamily;
+import com.google.android.material.shape.MaterialShapeDrawable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,9 +55,16 @@ public class Fragment_Search extends Fragment {
         toolbarSearch = view.findViewById(R.id.toolBarSearchSongs);
         recyclerViewSearchSong = view.findViewById(R.id.ListSearchSong);
         noData = view.findViewById(R.id.noDataSearch);
+
         ((AppCompatActivity)getActivity()).setSupportActionBar(toolbarSearch);
         toolbarSearch.setTitle("");
         setHasOptionsMenu(true);
+
+//        MaterialShapeDrawable materialShapeDrawable = (MaterialShapeDrawable)toolbarSearch.getBackground();
+//        materialShapeDrawable.setShapeAppearanceModel(materialShapeDrawable.getShapeAppearanceModel()
+//                .toBuilder()
+//                .setAllCorners(CornerFamily.ROUNDED,radius_search)
+//                .build());
 
         return view;
     }
@@ -102,15 +116,16 @@ public class Fragment_Search extends Fragment {
 //                set adapter for recycle view
                     recyclerViewSearchSong.setAdapter(searchSongsAdapter);
 
-                    noData.setVisibility(View.GONE);
-                    recyclerViewSearchSong.setVisibility(View.VISIBLE);
+                    noData.setVisibility(GONE);
+                    recyclerViewSearchSong.setVisibility(VISIBLE);
 
                 } else {
 
                     dialog.dismiss();
 
-                    recyclerViewSearchSong.setVisibility(View.GONE);
-                    noData.setVisibility(View.VISIBLE);
+                    recyclerViewSearchSong.setVisibility(GONE);
+
+                    noData.setVisibility(VISIBLE);
                 }
             }
 

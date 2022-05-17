@@ -1,6 +1,7 @@
 package huutoan.yomusic.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,48 +11,56 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-import huutoan.yomusic.Activity.AllListActivity;
+import huutoan.yomusic.Activity.ListSongActivity;
 import huutoan.yomusic.Model.Charts;
+import huutoan.yomusic.Model.Singer;
 import huutoan.yomusic.R;
 
-public class AllListAdapter extends RecyclerView.Adapter<AllListAdapter.ViewHolder> {
+public class AlbumAllAdapter extends RecyclerView.Adapter<AlbumAllAdapter.ViewHolder> {
 
     View view;
     Context context;
-    ArrayList<Charts> chartsArrayList;
-    Charts charts;
+    ArrayList<Singer> singerArrayList;
+    Singer singer;
 
-    public  AllListAdapter(Context context ,ArrayList<Charts> chartsArrayList) {
+    public AlbumAllAdapter(Context context , ArrayList<Singer> chartsArrayList) {
         this.context = context;
-        this.chartsArrayList = chartsArrayList;
+        this.singerArrayList = chartsArrayList;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        view = inflater.inflate(R.layout.part_all_list ,parent, false);
-        return new AllListAdapter.ViewHolder(view);
+        view = inflater.inflate(R.layout.part_album_fragment,parent, false);
+        return new AlbumAllAdapter.ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        charts = chartsArrayList.get(position);
-        if ( charts == null) {
+        singer = singerArrayList.get(position);
+        if ( singer == null) {
             return;
         }
-        holder.textTitleAllList.setText(charts.getTitle());
-        holder.textArticleAllList.setText(charts.getName());
-        Picasso.get().load(charts.getName()).into(holder.imageAllList);
+        holder.textTitleAllList.setText(singer.getName());
+        holder.textArticleAllList.setText(singer.getArtistsName());
+        Glide.with(context).load(singer.getThumbnail()).into(holder.imageAllList);
+
+        view.setOnClickListener((View view) -> {
+            Intent intent = new Intent(context, ListSongActivity.class);
+            intent.putExtra("listSongOfSinger", singerArrayList.get(position));
+            context.startActivity(intent);
+        });
     }
 
     @Override
     public int getItemCount() {
-        return chartsArrayList.size();
+        return singerArrayList.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

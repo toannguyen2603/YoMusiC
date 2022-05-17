@@ -14,7 +14,6 @@
         android:layout_marginTop="15dp"
         android:layout_marginBottom="15dp"
         android:fontFamily="@font/roboto_slab_bold_pkgr"
-        android:text="Most like song"
         android:textColor="@color/white"
         android:textSize="24sp"
         android:textStyle="bold" />

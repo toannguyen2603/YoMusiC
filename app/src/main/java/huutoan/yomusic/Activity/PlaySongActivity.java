@@ -413,6 +413,10 @@ public class PlaySongActivity extends AppCompatActivity {
 
                 new playMusic().execute(songArrayListSong.get(position).getLink());
                 fragment_disk_song.ImageSong(songArrayListSong.get(position).getThumbnail());
+
+                textViewNameSong.setText(songArrayListSong.get(position).getTitle());
+                textViewNameArticle.setText(songArrayListSong.get(position).getArtists());
+
                 Objects.requireNonNull(getSupportActionBar()).setTitle(songArrayListSong.get(position).getNameSong());
 
                 UpdateTimePlaySong();
@@ -448,6 +452,8 @@ public class PlaySongActivity extends AppCompatActivity {
 
             new playMusic().execute(songArrayListSong.get(position).getLink());
             fragment_disk_song.ImageSong(songArrayListSong.get(position).getThumbnail());
+            textViewNameSong.setText(songArrayListSong.get(position).getTitle());
+            textViewNameArticle.setText(songArrayListSong.get(position).getArtists());
             Objects.requireNonNull(getSupportActionBar()).setTitle(songArrayListSong.get(position).getNameSong());
         }
         makeButtonDelay();

@@ -33,6 +33,7 @@
         <entry key="app/src/main/res/drawable/outline_manage_accounts_24.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/outline_search_24.xml" value="0.2005" />
         <entry key="app/src/main/res/drawable/part_list_song.xml" value="0.1755" />
+        <entry key="app/src/main/res/drawable/radius_search.xml" value="0.1825" />
         <entry key="app/src/main/res/drawable/search.xml" value="0.2005" />
         <entry key="app/src/main/res/drawable/setting.xml" value="0.175" />
         <entry key="app/src/main/res/font/arimo_bold.xml" value="0.31562819203268644" />
@@ -45,7 +46,7 @@
         <entry key="app/src/main/res/layout/fragment_album.xml" value="0.266304347826087" />
         <entry key="app/src/main/res/layout/fragment_charts.xml" value="0.266304347826087" />
         <entry key="app/src/main/res/layout/fragment_disk_song.xml" value="0.2833333333333333" />
-        <entry key="app/src/main/res/layout/fragment_home_page.xml" value="0.2557291666666667" />
+        <entry key="app/src/main/res/layout/fragment_home_page.xml" value="0.2997032640949555" />
         <entry key="app/src/main/res/layout/fragment_library.xml" value="0.2557291666666667" />
         <entry key="app/src/main/res/layout/fragment_most_liked_song.xml" value="0.266304347826087" />
         <entry key="app/src/main/res/layout/fragment_new_music.xml" value="0.266304347826087" />
@@ -57,6 +58,7 @@
         <entry key="app/src/main/res/layout/fragment_trending_hits.xml" value="0.2557291666666667" />
         <entry key="app/src/main/res/layout/frangment_album.xml" value="0.266304347826087" />
         <entry key="app/src/main/res/layout/part_album.xml" value="0.266304347826087" />
+        <entry key="app/src/main/res/layout/part_album_fragment.xml" value="0.2833333333333333" />
         <entry key="app/src/main/res/layout/part_all_list.xml" value="0.26875" />
         <entry key="app/src/main/res/layout/part_charts.xml" value="0.266304347826087" />
         <entry key="app/src/main/res/layout/part_dialog.xml" value="0.26875" />
@@ -64,7 +66,7 @@
         <entry key="app/src/main/res/layout/part_most_liked_song.xml" value="0.42129211425781254" />
         <entry key="app/src/main/res/layout/part_new_music.xml" value="0.266304347826087" />
         <entry key="app/src/main/res/layout/part_play_songs.xml" value="0.2833333333333333" />
-        <entry key="app/src/main/res/layout/part_playlist.xml" value="0.34195098876953123" />
+        <entry key="app/src/main/res/layout/part_playlist.xml" value="0.6571334838867188" />
         <entry key="app/src/main/res/layout/part_search.xml" value="0.26875" />
         <entry key="app/src/main/res/layout/part_topic.xml" value="0.266304347826087" />
         <entry key="app/src/main/res/layout/part_trending.xml" value="0.2205810546875" />

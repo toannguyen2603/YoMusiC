@@ -60,14 +60,11 @@ public class Fragment_Trending_Hits extends Fragment {
 
                 ArrayList<Trending> trending = (ArrayList<Trending>) response.body();
 
-                Log.d("ABCD", String.valueOf(trending.size()));
-
                 trendingAdapter = new TrendingAdapter(getActivity(), trending);
 
                 viewPager.setAdapter(trendingAdapter);
                 circleIndicator.setViewPager(Fragment_Trending_Hits.viewPager);
 //                manager
-
 
                 if(trending.size() > 0) {
 
