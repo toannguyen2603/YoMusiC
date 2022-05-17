@@ -22,7 +22,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:expandedTitleGravity="center|bottom"
-            app:expandedTitleMarginBottom="5dp"
+            app:expandedTitleMarginBottom="20dp"
             android:fitsSystemWindows="true"
             app:title="Text view"
             app:contentScrim="@color/toolbar_color"
@@ -61,7 +61,7 @@
         app:fabSize="normal"
         app:layout_anchor="@id/appBarLayout"
         app:layout_anchorGravity="bottom|end"
-        android:layout_marginEnd="28dp"
+        android:layout_marginEnd="24sp"
         />
 
     <androidx.core.widget.NestedScrollView

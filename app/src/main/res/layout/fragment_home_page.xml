@@ -51,7 +51,7 @@
                     android:background="@color/white"
                     android:backgroundTint="@color/black_main"
                     app:lottie_autoPlay="true"
-                    android:layout_marginLeft="171dp"
+                    android:layout_marginLeft="128dp"
                     app:lottie_loop="true"
                     app:lottie_rawRes="@raw/bell" />
             </LinearLayout>

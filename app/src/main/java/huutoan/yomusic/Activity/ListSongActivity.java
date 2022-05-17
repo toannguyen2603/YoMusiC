@@ -93,13 +93,16 @@ public class ListSongActivity extends AppCompatActivity {
 
         setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+
         toolbar.setNavigationOnClickListener((View view) -> {
             finish();
             songArrayList.clear();
         });
         collapsingToolbarLayout.setExpandedTitleColor(Color.WHITE);
         collapsingToolbarLayout.setCollapsedTitleTextColor(Color.WHITE);
+
         collapsingToolbarLayout.setExpandedTitleTextAppearance(R.style.ExpandedAppBar);
+//        collapsingToolbarLayout.setCollapsedTitleTextAppearance(R.style.CollapsedAppBar);
         floatingActionButton.setEnabled(false);
 
     }

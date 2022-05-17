@@ -13,8 +13,8 @@
         android:layout_height="wrap_content">
         <ImageView
             android:id="@+id/imageViewAllList"
-            android:layout_width="180dp"
-            android:layout_height="180dp"
+            android:layout_width="164dp"
+            android:layout_height="177dp"
             android:src="@drawable/mada"
             android:scaleType="centerCrop"
             />
