@@ -1,11 +1,6 @@
     ExTrip
-├── AppDelegate
-│   ├── AppDelegate.swift
-│   └── SceneDelegate.swift
 ├── Base
 │   └── ETTableViewCell.swift
-├── Base.lproj
-│   └── LaunchScreen.storyboard
 ├── Common
 │   ├── AsyncImageView.swift
 │   └── ImageCache.swift
@@ -54,8 +49,6 @@
 │   └── UIViewController+Extension.swift
 ├── Framework
 │   └── Calender
-├── GoogleService-Info.plist
-├── Info.plist
 ├── Model
 │   ├── BookingModel.swift
 │   ├── DestinationModel.swift
